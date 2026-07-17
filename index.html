@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClinicBook Pro — Your Clinic's WhatsApp Receptionist</title>
+<meta name="description" content="An AI receptionist that answers patient questions, books appointments, and hands off the hard cases to your staff — all inside WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F3EC;
+    --paper-raised:#FBFAF5;
+    --ink:#1C2B27;
+    --ink-soft:#5B6D67;
+    --emerald:#2F6B57;
+    --emerald-dark:#204A3C;
+    --clay:#B5432D;
+    --mist:#DCE4DD;
+    --mist-dark:#C6D0C8;
+    --radius:2px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--emerald); outline-offset:3px;}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--emerald-dark);
+    font-weight:500;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site{
+    padding:22px 0;
+    border-bottom:1px solid var(--mist-dark);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between;}
+  .brand{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:19px;
+    letter-spacing:-0.01em;
+  }
+  .brand span{color:var(--emerald);}
+  nav.site-links{display:flex; gap:28px; font-size:14.5px;}
+  nav.site-links a{text-decoration:none; color:var(--ink-soft);}
+  nav.site-links a:hover{color:var(--ink);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:76px 0 88px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:44px;
+    line-height:1.12;
+    margin-top:16px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--emerald);
+  }
+  .hero p.lede{
+    font-size:17.5px;
+    color:var(--ink-soft);
+    max-width:46ch;
+    margin-top:20px;
+  }
+  .cta-row{
+    display:flex;
+    gap:14px;
+    margin-top:32px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:14.5px;
+    font-weight:600;
+    padding:14px 22px;
+    border-radius:var(--radius);
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--emerald); color:#fff;}
+  .btn-primary:hover{background:var(--emerald-dark);}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+
+  /* ---------- APPOINTMENT CARD (signature element) ---------- */
+  .card-stage{
+    position:relative;
+    display:flex;
+    justify-content:center;
+  }
+  .appt-card{
+    background:var(--paper-raised);
+    width:100%;
+    max-width:360px;
+    padding:22px 20px 26px;
+    border:1px solid var(--mist-dark);
+    border-radius:6px;
+    position:relative;
+    transform:rotate(-2deg);
+    box-shadow:0 22px 40px -18px rgba(28,43,39,0.28);
+  }
+  .appt-card::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height:10px;
+    background-image:radial-gradient(circle, var(--paper) 3px, transparent 3.2px);
+    background-size:16px 10px;
+    background-position:2px 0;
+    background-repeat:repeat-x;
+  }
+  .appt-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    border-bottom:1px dashed var(--mist-dark);
+    padding-bottom:12px;
+    margin-bottom:14px;
+    margin-top:6px;
+  }
+  .appt-head .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .appt-head .clinic-name{
+    font-family:'Fraunces', serif;
+    font-size:16px;
+    margin-top:2px;
+  }
+  .wa-dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--emerald);
+    display:inline-block;
+    margin-right:6px;
+  }
+
+  .chat{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    min-height:230px;
+  }
+  .bubble{
+    max-width:82%;
+    padding:9px 13px;
+    border-radius:12px;
+    font-size:13.5px;
+    line-height:1.4;
+    opacity:0;
+    transform:translateY(6px);
+    animation:rise 0.4s ease forwards;
+  }
+  @keyframes rise{ to{opacity:1; transform:translateY(0);} }
+  .bubble.patient{
+    align-self:flex-end;
+    background:var(--mist);
+    color:var(--ink);
+    border-bottom-right-radius:3px;
+  }
+  .bubble.ai{
+    align-self:flex-start;
+    background:var(--emerald);
+    color:#fff;
+    border-bottom-left-radius:3px;
+  }
+  .bubble .meta{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px;
+    opacity:0.65;
+    margin-top:3px;
+  }
+
+  .stamp{
+    position:absolute;
+    bottom:18px;
+    right:18px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    color:var(--clay);
+    border:1.5px solid var(--clay);
+    padding:4px 9px;
+    border-radius:3px;
+    transform:rotate(-8deg) scale(0.85);
+    opacity:0;
+    transition:opacity 0.3s ease, transform 0.3s ease;
+  }
+  .stamp.show{
+    opacity:1;
+    transform:rotate(-8deg) scale(1);
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:72px 0;}
+  section.alt{background:var(--paper-raised); border-top:1px solid var(--mist-dark); border-bottom:1px solid var(--mist-dark);}
+  .section-head{max-width:56ch; margin-bottom:40px;}
+  .section-head h2{font-size:30px; margin-top:12px; line-height:1.2;}
+  .section-head p{color:var(--ink-soft); font-size:16px; margin-top:14px;}
+
+  /* ---------- VIDEOS ---------- */
+  .video-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+  .video-card{
+    background:var(--paper);
+    border:1px solid var(--mist-dark);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .video-frame{
+    aspect-ratio:16/10;
+    background:var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+  .video-frame video, .video-frame img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .play-btn{
+    width:56px; height:56px;
+    border-radius:50%;
+    background:rgba(245,243,236,0.92);
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    z-index:2;
+  }
+  .play-btn::after{
+    content:"";
+    border-style:solid;
+    border-width:9px 0 9px 15px;
+    border-color:transparent transparent transparent var(--ink);
+    margin-left:3px;
+  }
+  .video-info{padding:18px 20px;}
+  .video-info .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--emerald-dark);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+  .video-info h3{font-size:19px; margin-top:6px;}
+  .video-info p{color:var(--ink-soft); font-size:14.5px; margin-top:6px;}
+
+  /* ---------- CHECKLIST ---------- */
+  .intake{
+    background:var(--paper-raised);
+    border:1px solid var(--mist-dark);
+    border-radius:6px;
+    padding:8px 0;
+  }
+  .intake-row{
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+    padding:20px 28px;
+    border-bottom:1px solid var(--mist);
+  }
+  .intake-row:last-child{border-bottom:none;}
+  .box{
+    width:18px; height:18px;
+    border:1.5px solid var(--emerald);
+    border-radius:3px;
+    flex-shrink:0;
+    margin-top:3px;
+    position:relative;
+  }
+  .box::after{
+    content:"";
+    position:absolute;
+    left:3px; top:-1px;
+    width:5px; height:9px;
+    border-right:2px solid var(--emerald);
+    border-bottom:2px solid var(--emerald);
+    transform:rotate(40deg);
+  }
+  .intake-row .txt strong{display:block; font-size:15.5px; margin-bottom:3px;}
+  .intake-row .txt span{color:var(--ink-soft); font-size:14.5px;}
+
+  /* ---------- FLOW ---------- */
+  .flow{
+    display:flex;
+    align-items:stretch;
+    gap:0;
+    flex-wrap:wrap;
+  }
+  .flow-step{
+    flex:1 1 200px;
+    background:var(--paper);
+    border:1px solid var(--mist-dark);
+    padding:22px 20px;
+    position:relative;
+  }
+  .flow-step + .flow-step{border-left:none;}
+  .flow-step .n{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--emerald-dark);
+    letter-spacing:0.08em;
+  }
+  .flow-step h4{
+    font-family:'Fraunces', serif;
+    font-size:16px;
+    font-weight:500;
+    margin:8px 0 6px;
+  }
+  .flow-step p{font-size:13.5px; color:var(--ink-soft); margin:0;}
+  .flow-step.escalate{background:var(--ink); color:var(--paper);}
+  .flow-step.escalate .n{color:#8FBBA9;}
+  .flow-step.escalate h4{color:#fff;}
+  .flow-step.escalate p{color:#C9D6D0;}
+
+  /* ---------- FOOTER CTA ---------- */
+  .final-cta{
+    text-align:center;
+    padding:88px 0 96px;
+  }
+  .final-cta h2{font-size:32px; max-width:20ch; margin:14px auto 0;}
+  .final-cta p{color:var(--ink-soft); margin-top:16px;}
+  .final-cta .cta-row{justify-content:center;}
+
+  footer{
+    border-top:1px solid var(--mist-dark);
+    padding:28px 0;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr; gap:44px;}
+    .hero h1{font-size:34px;}
+    .video-grid{grid-template-columns:1fr;}
+    .flow-step + .flow-step{border-left:1px solid var(--mist-dark); border-top:none;}
+    .flow{flex-direction:column;}
+    nav.site-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-inner">
+    <div class="brand">ClinicBook <span>Pro</span></div>
+    <nav class="site-links">
+      <a href="#demo">See it work</a>
+      <a href="#tour">Full app tour</a>
+      <a href="#how">How it works</a>
+      <a href="#contact">Book a demo</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">WhatsApp AI Receptionist for Clinics</p>
+      <h1>Your clinic already gets messages at 11pm. <em>Now someone answers them.</em></h1>
+      <p class="lede">An AI receptionist that answers patient questions, books and reschedules appointments, and hands the hard cases straight to your staff — all inside WhatsApp, where your patients already are.</p>
+      <div class="cta-row">
+        <a href="#demo" class="btn btn-primary">▶ Watch it book an appointment</a>
+        <a href="#contact" class="btn btn-ghost">Book a live demo</a>
+      </div>
+    </div>
+
+    <div class="card-stage">
+      <div class="appt-card" id="apptCard">
+        <div class="appt-head">
+          <div>
+            <span class="label"><span class="wa-dot"></span>WhatsApp</span>
+            <div class="clinic-name">City Clinic — Dental</div>
+          </div>
+          <span class="label">Today</span>
+        </div>
+        <div class="chat" id="chatLog"></div>
+        <div class="stamp" id="stamp">CONFIRMED ✓</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">See it work</p>
+      <h2>Two real conversations, not a mockup.</h2>
+      <p>Screen recordings of the actual assistant, running on a real WhatsApp number.</p>
+    </div>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-frame">
+          <!-- Replace this block with a <video controls src="..."> or an <iframe> embed once the recording is ready -->
+          <div class="play-btn"></div>
+        </div>
+        <div class="video-info">
+          <span class="tag">01 · Booking</span>
+          <h3>A patient books in under a minute</h3>
+          <p>From "I need a doctor" to a confirmed slot — no phone call, no waiting for a reply.</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-frame">
+          <div class="play-btn"></div>
+        </div>
+        <div class="video-info">
+          <span class="tag">02 · Questions</span>
+          <h3>Common questions, answered instantly</h3>
+          <p>Hours, location, prices, which doctors are in today — answered the moment they're asked.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">For clinics and doctors</p>
+      <h2>What it actually does</h2>
+    </div>
+    <div class="intake">
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>Answers routine questions on its own</strong><span>Opening hours, location, prices, which doctors are available today.</span></div>
+      </div>
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>Books and reschedules appointments</strong><span>No back-and-forth. The patient picks a slot, it's confirmed.</span></div>
+      </div>
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>Sends reminders before the visit</strong><span>Fewer no-shows, without anyone having to remember to call.</span></div>
+      </div>
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>Hands off anything complicated</strong><span>Your front desk takes over instantly for anything the AI shouldn't decide alone.</span></div>
+      </div>
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>Works around the clock</strong><span>Nights, weekends, between patients — whenever someone messages.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tour">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Beyond the receptionist</p>
+      <h2>See the rest of the app</h2>
+      <p>The WhatsApp AI receptionist is one part of ClinicBook Pro. Here's the rest — the dashboards and tools your doctors and front desk use every day.</p>
+    </div>
+    <div class="video-grid" id="appTourGrid"></div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2>Where a message goes</h2>
+      <p>This isn't replacing your receptionist. It's filtering what reaches them.</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step">
+        <span class="n">01</span>
+        <h4>Patient sends a message</h4>
+        <p>Any question, in their own words, on WhatsApp.</p>
+      </div>
+      <div class="flow-step">
+        <span class="n">02</span>
+        <h4>Routine? Answered.</h4>
+        <p>Hours, prices, availability — handled on the spot.</p>
+      </div>
+      <div class="flow-step">
+        <span class="n">03</span>
+        <h4>Wants an appointment? Booked.</h4>
+        <p>Checked against real availability, confirmed instantly.</p>
+      </div>
+      <div class="flow-step escalate">
+        <span class="n">04</span>
+        <h4>Anything else → your staff</h4>
+        <p>Flagged and handed to a human, immediately.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta" id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Ready when you are</p>
+    <h2>See it running on your own clinic's number</h2>
+    <p>A 15-minute call. No commitment — just a live look at how it would handle your patients.</p>
+    <div class="cta-row">
+      <a href="mailto:alfred@example.com?subject=Live%20demo%20request" class="btn btn-primary">Book a live demo</a>
+      <a href="https://wa.me/000000000000" class="btn btn-ghost">Message on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>ClinicBook Pro — built for clinics in Algeria and Kenya</span>
+    <span>contact@example.com</span>
+  </div>
+</footer>
+
+<script>
+  // Hero chat animation — replays the booking flow with a small typing delay.
+  // Respects prefers-reduced-motion by rendering instantly instead of animating.
+  const chatLog = document.getElementById('chatLog');
+  const stamp = document.getElementById('stamp');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const script = [
+    { who: 'patient', text: 'Hi, I\'d like an appointment with a dentist' },
+    { who: 'ai', text: 'Sure — what day works for you?' },
+    { who: 'patient', text: 'Tomorrow morning if possible' },
+    { who: 'ai', text: 'There\'s a 9:30 slot open with Dr. Amrani. Shall I book it?' },
+    { who: 'patient', text: 'Yes' },
+    { who: 'ai', text: '✅ Appointment confirmed — 9:30, Dr. Amrani' }
+  ];
+
+  function renderBubble(msg){
+    const div = document.createElement('div');
+    div.className = 'bubble ' + msg.who;
+    div.textContent = msg.text;
+    chatLog.appendChild(div);
+  }
+
+  function playScript(){
+    chatLog.innerHTML = '';
+    stamp.classList.remove('show');
+    if (reduceMotion){
+      script.forEach(renderBubble);
+      stamp.classList.add('show');
+      return;
+    }
+    script.forEach((msg, i) => {
+      setTimeout(() => {
+        renderBubble(msg);
+        if (i === script.length - 1){
+          setTimeout(() => stamp.classList.add('show'), 350);
+        }
+      }, i * 900);
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        playScript();
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(document.getElementById('apptCard'));
+
+  // ---------------------------------------------------------------
+  // Full app tour videos — the rest of ClinicBook Pro, not just the
+  // AI receptionist. Add a new video by adding one object below.
+  // "src" is optional — leave it out and the card shows a play
+  // button placeholder until you have a recording ready.
+  //   {
+  //     tag:  'Front Desk',                 // short category label
+  //     title: 'Handling an escalation',     // card headline
+  //     desc: 'What your receptionist sees when the AI hands off a conversation.',
+  //     src:  'videos/front-desk-handoff.mp4' // optional, omit if not recorded yet
+  //   }
+  // ---------------------------------------------------------------
+  const appTourVideos = [
+    {
+      tag: 'Doctor Dashboard',
+      title: 'A doctor\'s day at a glance',
+      desc: 'Today\'s schedule, upcoming patients, and availability — all in one screen.'
+    },
+    {
+      tag: 'Front Desk',
+      title: 'Handling an escalation',
+      desc: 'What your staff sees the moment the AI hands off a conversation.'
+    },
+    {
+      tag: 'Admin',
+      title: 'Managing doctors and departments',
+      desc: 'Add a doctor, set their hours, and they\'re bookable the same day.'
+    },
+    {
+      tag: 'Patient Booking Page',
+      title: 'Booking without WhatsApp',
+      desc: 'For patients who\'d rather book from a link than message the clinic.'
+    }
+  ];
+
+  function renderTourGrid(){
+    const grid = document.getElementById('appTourGrid');
+    grid.innerHTML = appTourVideos.map(v => `
+      <div class="video-card">
+        <div class="video-frame">
+          ${v.src
+            ? `<video controls preload="metadata" src="${v.src}"></video>`
+            : `<div class="play-btn"></div>`}
+        </div>
+        <div class="video-info">
+          <span class="tag">${v.tag}</span>
+          <h3>${v.title}</h3>
+          <p>${v.desc}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  renderTourGrid();
+</script>
+
+</body>
+</html>
