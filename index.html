@@ -449,8 +449,7 @@
     <div class="video-grid">
       <div class="video-card">
         <div class="video-frame">
-          <!-- Replace this block with a <video controls src="..."> or an <iframe> embed once the recording is ready -->
-          <div class="play-btn"></div>
+          <video controls preload="metadata" src="videos/ai-whatsapp.mp4"></video>
         </div>
         <div class="video-info">
           <span class="tag">01 · Booking</span>
@@ -460,7 +459,7 @@
       </div>
       <div class="video-card">
         <div class="video-frame">
-          <div class="play-btn"></div>
+          <video controls preload="metadata" src="videos/answers-whatsapp.mp4"></video>
         </div>
         <div class="video-info">
           <span class="tag">02 · Questions</span>
@@ -605,7 +604,7 @@
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
     <span>ClinicBook Pro — built for clinics in Kenya</span>
-    <span>Contact: alfredmaina009@gmail.com</span>
+    <span>contact: alfredmaina009@gmail.com</span>
   </div>
 </footer>
 
@@ -677,22 +676,26 @@
     {
       tag: 'Doctor Dashboard',
       title: 'A doctor\'s day at a glance',
-      desc: 'Today\'s schedule, upcoming patients, and availability — all in one screen.'
+      desc: 'Today\'s schedule, upcoming patients, and availability — all in one screen.',
+      src: 'videos/doctor.mp4'
     },
     {
       tag: 'Front Desk',
       title: 'Handling an escalation',
-      desc: 'What your staff sees the moment the AI hands off a conversation.'
+      desc: 'What your staff sees the moment the AI hands off a conversation.',
+      src: 'videos/receptionist.mp4'
     },
     {
       tag: 'Admin',
       title: 'Managing doctors and departments',
-      desc: 'Add a doctor, set their hours, and they\'re bookable the same day.'
+      desc: 'Add a doctor, set their hours, and they\'re bookable the same day.',
+      src: 'videos/admin.mp4'
     },
     {
       tag: 'Patient Booking Page',
       title: 'Booking without WhatsApp',
-      desc: 'For patients who\'d rather book from a link than message the clinic.'
+      desc: 'For patients who\'d rather book from a link than message the clinic.',
+      src: 'videos/patient.mp4'
     }
   ];
 
