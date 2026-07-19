@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ClinicBook Pro — Your Clinic's WhatsApp Receptionist</title>
-<meta name="description" content="An AI receptionist that answers patient questions, books appointments, and hands off the hard cases to your staff such as medical queries — all inside WhatsApp.">
+<meta name="description" content="An AI receptionist that answers patient questions, books appointments, and hands off the hard cases to your staff — all inside WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -392,6 +392,7 @@
     .video-grid{grid-template-columns:1fr;}
     .flow-step + .flow-step{border-left:1px solid var(--mist-dark); border-top:none;}
     .flow{flex-direction:column;}
+    .integration-grid{grid-template-columns:1fr !important;}
     nav.site-links{display:none;}
   }
 </style>
@@ -448,8 +449,7 @@
     <div class="video-grid">
       <div class="video-card">
         <div class="video-frame">
-          <!-- Replace this block with a <video controls src="..."> or an <iframe> embed once the recording is ready -->
-          <div class="play-btn"></div>
+          <video controls preload="metadata" src="videos/ai-whatsapp.mp4"></video>
         </div>
         <div class="video-info">
           <span class="tag">01 · Booking</span>
@@ -459,7 +459,7 @@
       </div>
       <div class="video-card">
         <div class="video-frame">
-          <div class="play-btn"></div>
+          <video controls preload="metadata" src="videos/answers-whatsapp.mp4"></video>
         </div>
         <div class="video-info">
           <span class="tag">02 · Questions</span>
@@ -540,6 +540,50 @@
         <span class="n">04</span>
         <h4>Anything else → your staff</h4>
         <p>Flagged and handed to a human, immediately.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Fits into what you already have</p>
+      <h2>Works seamlessly with your existing hospital system</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:start;" class="integration-grid">
+      <div>
+        <p style="font-size:16px; color:var(--ink-soft); max-width:56ch;">
+          Our AI receptionist is designed to complement — not replace — your existing hospital management system and reception staff.
+        </p>
+        <p style="font-size:16px; color:var(--ink-soft); max-width:56ch; margin-top:16px;">
+          It acts as an intelligent communication layer on WhatsApp, handling routine patient interactions: appointment bookings, common questions, doctor availability, reminders, and rescheduling requests.
+        </p>
+        <p style="font-size:16px; color:var(--ink-soft); max-width:56ch; margin-top:16px;">
+          Appointments made through the AI sync with your existing workflow, so receptionists see scheduled patients before they arrive. That means fewer phone calls, less repetitive admin work, and shorter response times — freeing staff to focus on in-person care and the cases that actually need a human.
+        </p>
+        <p style="font-size:16.5px; color:var(--ink); font-weight:600; margin-top:20px;">
+          Faster patient service. Better staff efficiency. Nothing about your current systems has to change.
+        </p>
+      </div>
+
+      <div class="flow" style="flex-direction:column;">
+        <div class="flow-step">
+          <span class="n">YOUR SYSTEM</span>
+          <h4>Existing hospital management system</h4>
+          <p>Stays exactly as it is — no migration, no re-training.</p>
+        </div>
+        <div class="flow-step">
+          <span class="n">SYNCS WITH</span>
+          <h4>ClinicBook Pro AI Receptionist</h4>
+          <p>Handles bookings, FAQs, availability, and reminders on WhatsApp.</p>
+        </div>
+        <div class="flow-step escalate">
+          <span class="n">SEEN BY</span>
+          <h4>Your front desk staff</h4>
+          <p>Sees every scheduled patient before they walk in — nothing hidden.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -632,22 +676,26 @@
     {
       tag: 'Doctor Dashboard',
       title: 'A doctor\'s day at a glance',
-      desc: 'Today\'s schedule, upcoming patients, and availability — all in one screen.'
+      desc: 'Today\'s schedule, upcoming patients, and availability — all in one screen.',
+      src: 'videos/doctor.mp4'
     },
     {
       tag: 'Front Desk',
       title: 'Handling an escalation',
-      desc: 'What your staff sees the moment the AI hands off a conversation.'
+      desc: 'What your staff sees the moment the AI hands off a conversation.',
+      src: 'videos/receptionist.mp4'
     },
     {
       tag: 'Admin',
       title: 'Managing doctors and departments',
-      desc: 'Add a doctor, set their hours, and they\'re bookable the same day.'
+      desc: 'Add a doctor, set their hours, and they\'re bookable the same day.',
+      src: 'videos/admin.mp4'
     },
     {
       tag: 'Patient Booking Page',
       title: 'Booking without WhatsApp',
-      desc: 'For patients who\'d rather book from a link than message the clinic.'
+      desc: 'For patients who\'d rather book from a link than message the clinic.',
+      src: 'videos/patient.mp4'
     }
   ];
 
@@ -674,4 +722,3 @@
 
 </body>
 </html>
-
