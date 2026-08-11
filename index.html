@@ -491,6 +491,37 @@
   </div>
 </section>
 
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">For clinics and doctors</p>
+      <h2>What it actually does</h2>
+    </div>
+    <div class="intake">
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>Answers routine questions on its own</strong><span>Opening hours, location, prices, which doctors are available today.</span></div>
+      </div>
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>Books and reschedules appointments</strong><span>No back-and-forth. The patient picks a slot, it's confirmed.</span></div>
+      </div>
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>Sends reminders before the visit</strong><span>Fewer no-shows, without anyone having to remember to call.</span></div>
+      </div>
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>Hands off anything complicated</strong><span>Your front desk takes over instantly for anything the AI shouldn't decide alone.</span></div>
+      </div>
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>Works around the clock</strong><span>Nights, weekends, between patients — whenever someone messages.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="tour">
   <div class="wrap">
     <div class="section-head">
@@ -623,28 +654,90 @@
   function playScript(){
     chatLog.innerHTML = '';
     stamp.classList.remove('show');
-
     if (reduceMotion){
       script.forEach(renderBubble);
       stamp.classList.add('show');
       return;
     }
-
-    let i = 0;
-    function step(){
-      if (i >= script.length){
-        setTimeout(() => stamp.classList.add('show'), 300);
-        setTimeout(playScript, 4000);
-        return;
-      }
-      renderBubble(script[i]);
-      i++;
-      setTimeout(step, 900);
-    }
-    step();
+    script.forEach((msg, i) => {
+      setTimeout(() => {
+        renderBubble(msg);
+        if (i === script.length - 1){
+          setTimeout(() => stamp.classList.add('show'), 350);
+        }
+      }, i * 900);
+    });
   }
 
-  playScript();
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        playScript();
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(document.getElementById('apptCard'));
+
+  // ---------------------------------------------------------------
+  // Full app tour videos — the rest of ClinicBook Pro, not just the
+  // AI receptionist. Add a new video by adding one object below.
+  // "src" is optional — leave it out and the card shows a play
+  // button placeholder until you have a recording ready.
+  //   {
+  //     tag:  'Front Desk',                 // short category label
+  //     title: 'Handling an escalation',     // card headline
+  //     desc: 'What your receptionist sees when the AI hands off a conversation.',
+  //     src:  'videos/front-desk-handoff.mp4' // optional, omit if not recorded yet
+  //   }
+  // ---------------------------------------------------------------
+  const appTourVideos = [
+    {
+      tag: 'Doctor Dashboard',
+      title: 'A doctor\'s day at a glance',
+      desc: 'Today\'s schedule, upcoming patients, and availability — all in one screen.',
+      src: 'videos/doctor.mp4'
+    },
+    {
+      tag: 'Front Desk',
+      title: 'Handling an escalation',
+      desc: 'What your staff sees the moment the AI hands off a conversation.',
+      src: 'videos/receptionist.mp4'
+    },
+    {
+      tag: 'Admin',
+      title: 'Managing doctors and departments',
+      desc: 'Add a doctor, set their hours, and they\'re bookable the same day.',
+      src: 'videos/admin.mp4'
+    },
+    {
+      tag: 'Patient Booking Page',
+      title: 'Booking without WhatsApp',
+      desc: 'For patients who\'d rather book from a link than message the clinic.',
+      src: 'videos/patient.mp4'
+    }
+  ];
+
+  function renderTourGrid(){
+    const grid = document.getElementById('appTourGrid');
+    grid.innerHTML = appTourVideos.map(v => `
+      <div class="video-card">
+        <div class="video-frame">
+          ${v.src
+            ? `<video controls preload="metadata" src="${v.src}"></video>`
+            : `<div class="play-btn"></div>`}
+        </div>
+        <div class="video-info">
+          <span class="tag">${v.tag}</span>
+          <h3>${v.title}</h3>
+          <p>${v.desc}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  renderTourGrid();
 </script>
 
 </body>
