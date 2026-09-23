@@ -3,23 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ClinicBook Pro — Your Clinic's WhatsApp Receptionist</title>
-<meta name="description" content="An AI receptionist that answers patient questions, books appointments, and hands off the hard cases to your staff — all inside WhatsApp.">
+<title>ClinicBook Pro — Turn WhatsApp Enquiries Into Booked Appointments</title>
+<meta name="description" content="ClinicBook Pro helps clinics and hospitals answer patient questions, book appointments, send reminders, and hand complex conversations to staff through WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F5F3EC;
+    --paper:#F7F8F4;
     --paper-raised:#FBFAF5;
-    --ink:#1C2B27;
-    --ink-soft:#5B6D67;
-    --emerald:#2F6B57;
-    --emerald-dark:#204A3C;
-    --clay:#B5432D;
-    --mist:#DCE4DD;
+    --paper-2:#EEF3EE;
+    --ink:#10231D;
+    --ink-soft:#42544D;
+    --emerald:#087A5B;
+    --emerald-dark:#07543F;
+    --mint:#DDF4E9;
+    --clay:#E96D4B;
+    --clay-soft:#FFF0EA;
+    --mist:#DCE6E0;
     --mist-dark:#C6D0C8;
+    --white:#FFFFFF;
     --radius:2px;
+    --shadow:0 18px 50px rgba(16,35,29,.10);
+    --shadow-soft:0 10px 30px rgba(16,35,29,.07);
   }
 
   *{box-sizing:border-box;}
@@ -31,11 +37,15 @@
 
   body{
     margin:0;
-    background:var(--paper);
+    background:
+      radial-gradient(circle at 88% 8%, rgba(8,122,91,.09), transparent 28%),
+      radial-gradient(circle at 5% 36%, rgba(233,109,75,.06), transparent 24%),
+      var(--paper);
     color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif;
+    font-family:'DM Sans', 'IBM Plex Sans', sans-serif;
     font-size:16px;
     line-height:1.55;
+    letter-spacing:-0.01em;
     -webkit-font-smoothing:antialiased;
   }
 
@@ -46,42 +56,71 @@
 
   .eyebrow{
     font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px;
-    letter-spacing:0.14em;
+    font-size:0.76rem;
+    letter-spacing:0.12em;
     text-transform:uppercase;
-    color:var(--emerald-dark);
-    font-weight:500;
+    color:var(--emerald);
+    font-weight:800;
   }
 
   h1,h2,h3{
-    font-family:'Fraunces', serif;
-    font-weight:500;
+    font-family:'Manrope', 'Fraunces', serif;
     margin:0;
     color:var(--ink);
-    letter-spacing:-0.01em;
+    letter-spacing:-0.035em;
   }
+  h1{font-weight:800;}
+  h2{font-weight:800;}
+  h3{font-weight:800;}
+  p{color:var(--ink-soft);}
 
   /* ---------- NAV ---------- */
   header.site{
-    padding:22px 0;
-    border-bottom:1px solid var(--mist-dark);
+    padding:18px 0;
+    border-bottom:1px solid rgba(16,35,29,.08);
+    background:rgba(247,248,244,.82);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    position:sticky;
+    top:0;
+    z-index:500;
   }
   .nav-inner{display:flex; align-items:center; justify-content:space-between;}
   .brand{
-    font-family:'Fraunces', serif;
-    font-weight:600;
+    font-family:'Manrope', 'Fraunces', serif;
+    font-weight:800;
     font-size:19px;
-    letter-spacing:-0.01em;
+    letter-spacing:-0.02em;
   }
   .brand span{color:var(--emerald);}
   nav.site-links{display:flex; gap:28px; font-size:14.5px;}
-  nav.site-links a{text-decoration:none; color:var(--ink-soft);}
+  nav.site-links a{text-decoration:none; color:var(--ink-soft); font-weight:500;}
   nav.site-links a:hover{color:var(--ink);}
 
   /* ---------- HERO ---------- */
   .hero{
     padding:76px 0 88px;
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg, rgba(221,244,233,.9), rgba(247,248,244,.78) 52%, rgba(255,240,234,.7));
   }
+  .hero::before{
+    content:"";
+    position:absolute;
+    width:420px; height:420px;
+    border-radius:50%;
+    background:rgba(8,122,91,.09);
+    right:-160px; top:-160px;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    width:260px; height:260px;
+    border-radius:50%;
+    background:rgba(233,109,75,.08);
+    left:-130px; bottom:-130px;
+  }
+  .hero > *{position:relative; z-index:1;}
   .hero-grid{
     display:grid;
     grid-template-columns:1.05fr 0.95fr;
@@ -89,7 +128,7 @@
     align-items:center;
   }
   .hero h1{
-    font-size:44px;
+    font-size:clamp(2.1rem, 4.4vw, 3.4rem);
     line-height:1.12;
     margin-top:16px;
   }
@@ -110,20 +149,20 @@
     flex-wrap:wrap;
   }
   .btn{
-    font-family:'IBM Plex Sans', sans-serif;
+    font-family:'DM Sans', 'IBM Plex Sans', sans-serif;
     font-size:14.5px;
     font-weight:600;
     padding:14px 22px;
-    border-radius:var(--radius);
+    border-radius:8px;
     text-decoration:none;
     display:inline-flex;
     align-items:center;
     gap:8px;
     border:1px solid transparent;
     cursor:pointer;
-    transition:transform 0.15s ease, background 0.15s ease;
+    transition:transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
   }
-  .btn:hover{transform:translateY(-1px);}
+  .btn:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(16,35,29,.12);}
   .btn-primary{background:var(--emerald); color:#fff;}
   .btn-primary:hover{background:var(--emerald-dark);}
   .btn-ghost{background:transparent; color:var(--ink); border-color:var(--ink);}
@@ -141,7 +180,7 @@
     max-width:360px;
     padding:22px 20px 26px;
     border:1px solid var(--mist-dark);
-    border-radius:6px;
+    border-radius:16px;
     position:relative;
     transform:rotate(-2deg);
     box-shadow:0 22px 40px -18px rgba(28,43,39,0.28);
@@ -213,13 +252,6 @@
     color:#fff;
     border-bottom-left-radius:3px;
   }
-  .bubble .meta{
-    display:block;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:9.5px;
-    opacity:0.65;
-    margin-top:3px;
-  }
 
   .stamp{
     position:absolute;
@@ -242,11 +274,17 @@
   }
 
   /* ---------- SECTION SHARED ---------- */
-  section{padding:72px 0;}
+  section{padding:72px 0; scroll-margin-top:90px;}
   section.alt{background:var(--paper-raised); border-top:1px solid var(--mist-dark); border-bottom:1px solid var(--mist-dark);}
   .section-head{max-width:56ch; margin-bottom:40px;}
-  .section-head h2{font-size:30px; margin-top:12px; line-height:1.2;}
+  .section-head h2{font-size:clamp(1.6rem, 3.2vw, 2.4rem); margin-top:12px; line-height:1.2;}
   .section-head p{color:var(--ink-soft); font-size:16px; margin-top:14px;}
+
+  #demo{
+    background:
+      radial-gradient(circle at 12% 20%, rgba(8,122,91,.08), transparent 25%),
+      radial-gradient(circle at 90% 80%, rgba(233,109,75,.07), transparent 24%);
+  }
 
   /* ---------- VIDEOS ---------- */
   .video-grid{
@@ -255,10 +293,17 @@
     gap:28px;
   }
   .video-card{
-    background:var(--paper);
-    border:1px solid var(--mist-dark);
-    border-radius:6px;
+    background:rgba(255,255,255,.82);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(16,35,29,.08);
+    border-radius:24px;
     overflow:hidden;
+    box-shadow:var(--shadow-soft);
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .video-card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow);
   }
   .video-frame{
     aspect-ratio:16/10;
@@ -301,7 +346,7 @@
   .intake{
     background:var(--paper-raised);
     border:1px solid var(--mist-dark);
-    border-radius:6px;
+    border-radius:16px;
     padding:8px 0;
   }
   .intake-row{
@@ -329,7 +374,7 @@
     border-bottom:2px solid var(--emerald);
     transform:rotate(40deg);
   }
-  .intake-row .txt strong{display:block; font-size:15.5px; margin-bottom:3px;}
+  .intake-row .txt strong{display:block; font-size:15.5px; margin-bottom:3px; color:var(--ink);}
   .intake-row .txt span{color:var(--ink-soft); font-size:14.5px;}
 
   /* ---------- FLOW ---------- */
@@ -370,8 +415,8 @@
     text-align:center;
     padding:88px 0 96px;
   }
-  .final-cta h2{font-size:32px; max-width:20ch; margin:14px auto 0;}
-  .final-cta p{color:var(--ink-soft); margin-top:16px;}
+  .final-cta h2{font-size:clamp(1.7rem, 3.4vw, 2.4rem); max-width:20ch; margin:14px auto 0;}
+  .final-cta p{color:var(--ink-soft); margin-top:16px; max-width:52ch; margin-left:auto; margin-right:auto;}
   .final-cta .cta-row{justify-content:center;}
 
   footer{
@@ -388,22 +433,195 @@
 
   @media (max-width:860px){
     .hero-grid{grid-template-columns:1fr; gap:44px;}
-    .hero h1{font-size:34px;}
     .video-grid{grid-template-columns:1fr;}
     .flow-step + .flow-step{border-left:1px solid var(--mist-dark); border-top:none;}
     .flow{flex-direction:column;}
     .integration-grid{grid-template-columns:1fr !important;}
     nav.site-links{display:none;}
   }
+
+  /* ---------- FLOATING ACTION BUTTONS ---------- */
+  .floating-actions{
+    position:fixed;
+    right:24px;
+    bottom:24px;
+    z-index:9000;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .floating-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    min-height:48px;
+    padding:0 17px;
+    border-radius:999px;
+    text-decoration:none;
+    font-family:'DM Sans', sans-serif;
+    font-size:14px;
+    font-weight:700;
+    box-shadow:0 14px 35px rgba(16,35,29,.18);
+    transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .floating-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 16px 38px rgba(16,35,29,.24);
+  }
+  .floating-book{
+    background:var(--ink);
+    color:#fff;
+  }
+  .floating-book:hover{background:var(--emerald-dark);}
+  .floating-whatsapp{
+    width:52px;
+    height:52px;
+    min-height:52px;
+    padding:0;
+    border-radius:50%;
+    background:#25D366;
+    color:#fff;
+  }
+  .floating-whatsapp:hover{background:#1ebe5d;}
+  .whatsapp-icon{
+    width:27px;
+    height:27px;
+    display:block;
+    fill:currentColor;
+  }
+
+  @media (max-width:600px){
+    .floating-actions{
+      right:14px;
+      bottom:14px;
+      left:14px;
+      justify-content:flex-end;
+    }
+    .floating-book{
+      flex:1;
+      max-width:230px;
+    }
+    .floating-btn{min-height:46px;}
+    .floating-whatsapp{
+      width:50px;
+      height:50px;
+      min-height:50px;
+      flex:0 0 50px;
+    }
+  }
+
+  /* ---------- FLOATING NAV MENU ---------- */
+  .floating-menu-wrap{
+    position:fixed;
+    top:18px;
+    right:22px;
+    z-index:9500;
+  }
+  .floating-menu-btn{
+    width:52px;
+    height:52px;
+    border:1px solid rgba(16,35,29,.10);
+    border-radius:16px;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    box-shadow:0 12px 32px rgba(16,35,29,.14);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+    cursor:pointer;
+    padding:0;
+  }
+  .floating-menu-btn span{
+    display:block;
+    width:21px;
+    height:2px;
+    border-radius:999px;
+    background:var(--ink);
+    transition:transform .22s ease, opacity .22s ease;
+  }
+  .floating-menu-wrap.open .floating-menu-btn span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .floating-menu-wrap.open .floating-menu-btn span:nth-child(2){opacity:0;}
+  .floating-menu-wrap.open .floating-menu-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .floating-menu-dropdown{
+    position:absolute;
+    top:62px;
+    right:0;
+    width:220px;
+    padding:8px;
+    border:1px solid rgba(16,35,29,.09);
+    border-radius:18px;
+    background:rgba(255,255,255,.97);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    box-shadow:0 18px 45px rgba(16,35,29,.16);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-7px) scale(.98);
+    transform-origin:top right;
+    transition:opacity .18s ease, transform .18s ease, visibility .18s ease;
+  }
+  .floating-menu-wrap.open .floating-menu-dropdown{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0) scale(1);
+  }
+  .floating-menu-dropdown a{
+    display:block;
+    padding:12px 13px;
+    border-radius:12px;
+    color:var(--ink);
+    text-decoration:none;
+    font-weight:700;
+    font-size:.92rem;
+    transition:background .18s ease, color .18s ease;
+  }
+  .floating-menu-dropdown a:hover{
+    background:var(--mint);
+    color:var(--emerald-dark);
+  }
+  @media (max-width:700px){
+    .floating-menu-wrap{top:12px; right:14px;}
+    .floating-menu-btn{width:48px; height:48px;}
+    .floating-menu-dropdown{top:58px; width:205px;}
+  }
 </style>
 </head>
 <body>
+
+<div class="floating-actions" aria-label="Quick actions">
+  <a href="mailto:alfred@clinicbookpro.com?subject=Live%20demo%20request" class="floating-btn floating-book">
+    Book a 15-minute demo
+  </a>
+  <a href="https://wa.me/254708910797" class="floating-btn floating-whatsapp" aria-label="Message ClinicBook Pro on WhatsApp" title="Message us on WhatsApp">
+    <svg class="whatsapp-icon" viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M19.11 17.2c-.27-.14-1.58-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.15-1.34-.8-.71-1.34-1.58-1.5-1.85-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27s.98 2.64 1.11 2.82c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.26.18 1.74.11.53-.08 1.58-.65 1.8-1.27.23-.62.23-1.15.16-1.27-.07-.11-.25-.18-.52-.32z"/>
+      <path d="M16.01 3.2c-7.07 0-12.81 5.74-12.81 12.81 0 2.26.59 4.47 1.72 6.41L3.1 28.8l6.53-1.72a12.75 12.75 0 0 0 6.38 1.72h.01c7.06 0 12.8-5.74 12.8-12.81S23.08 3.2 16.01 3.2zm0 23.42h-.01a10.62 10.62 0 0 1-5.41-1.48l-.39-.23-3.88 1.02 1.04-3.78-.25-.39a10.6 10.6 0 1 1 8.9 4.86z"/>
+    </svg>
+  </a>
+</div>
+
+<div class="floating-menu-wrap" id="floatingMenuWrap">
+  <button class="floating-menu-btn" id="floatingMenuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="floatingMenu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="floating-menu-dropdown" id="floatingMenu" aria-hidden="true">
+    <a href="#problem">The problem</a>
+    <a href="#demo">See it in action</a>
+    <a href="#tour">Full app tour</a>
+    <a href="#how">How it works</a>
+  </div>
+</div>
 
 <header class="site">
   <div class="wrap nav-inner">
     <div class="brand">ClinicBook <span>Pro</span></div>
     <nav class="site-links">
-      <a href="#demo">See it work</a>
+      <a href="#problem">The problem</a>
+      <a href="#demo">See it in action</a>
       <a href="#tour">Full app tour</a>
       <a href="#how">How it works</a>
       <a href="#contact">Book a demo</a>
@@ -414,12 +632,12 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">WhatsApp AI Receptionist for Clinics</p>
-      <h1>Your clinic already gets messages at 11pm. <em>Now someone answers them.</em></h1>
-      <p class="lede">An AI receptionist that answers patient questions, books and reschedules appointments, and hands the hard cases straight to your staff — all inside WhatsApp, where your patients already are.</p>
+      <p class="eyebrow">WhatsApp Patient Communication for Clinics & Hospitals</p>
+      <h1>Turn patient WhatsApp enquiries into <em>booked appointments.</em></h1>
+      <p class="lede">ClinicBook Pro gives your facility a WhatsApp AI receptionist that answers routine questions, checks availability, books and reschedules appointments, sends reminders, and hands complex conversations to your staff.</p>
+      <p class="lede" style="font-size:14.5px; margin-top:14px;"><strong>Works alongside your front desk — not instead of it.</strong></p>
       <div class="cta-row">
-        <a href="#demo" class="btn btn-primary">▶ Watch it book an appointment</a>
-        <a href="#contact" class="btn btn-ghost">Book a live demo</a>
+        <a href="#demo" class="btn btn-primary">▶ See it in action</a>
       </div>
     </div>
 
@@ -439,12 +657,47 @@
   </div>
 </section>
 
+<section style="padding:28px 0; border-top:1px solid var(--mist-dark); border-bottom:1px solid var(--mist-dark); background:var(--paper-raised);">
+  <div class="wrap" style="text-align:center;">
+    <p class="eyebrow" style="margin:0;">For hospital owners · administrators · clinic managers · medical directors</p>
+    <p style="margin:8px auto 0; font-size:17px; color:var(--ink); max-width:70ch;">Improve patient response without adding another person to the front desk.</p>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The patient communication problem</p>
+      <h2>Your front desk shouldn't have to answer the same question all day.</h2>
+      <p>Patients want quick answers. Your staff may already be answering calls, serving patients, checking schedules and handling administrative work.</p>
+    </div>
+    <div class="intake">
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>A patient asks a routine question</strong><span>"Is the doctor available tomorrow?" "How much is consultation?" "What time do you open?"</span></div>
+      </div>
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>Your staff may already be busy</strong><span>The message waits while the receptionist handles calls, walk-ins and other patients.</span></div>
+      </div>
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>Booking can become a back-and-forth conversation</strong><span>Patients ask about availability, choose a time, reschedule and ask follow-up questions.</span></div>
+      </div>
+      <div class="intake-row">
+        <div class="box"></div>
+        <div class="txt"><strong>ClinicBook Pro handles the routine</strong><span>Patients can get answers and move toward an appointment while your team stays available for the work that needs a human.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="demo">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">See it work</p>
-      <h2>Real conversations, not a mockup.</h2>
-      <p>Screen recordings of the actual assistant, running on a real WhatsApp number.</p>
+      <p class="eyebrow">See it in action</p>
+      <h2>Don't just read about it. Watch the patient journey.</h2>
+      <p>These videos show ClinicBook Pro handling real patient-service workflows on WhatsApp — from questions and booking to reminders and waitlist management.</p>
     </div>
     <div class="video-grid">
       <div class="video-card">
@@ -452,9 +705,9 @@
           <video controls preload="metadata" src="videos/overview.mp4"></video>
         </div>
         <div class="video-info">
-          <span class="tag">01 · Overview</span>
-          <h3>Why we built ClinicBook Pro</h3>
-          <p>The problem clinics face, who's behind it, and how the AI WhatsApp receptionist fits into your front desk.</p>
+          <span class="tag">01 · The solution</span>
+          <h3>What ClinicBook Pro does</h3>
+          <p>See the patient communication problem we are solving and how the WhatsApp AI receptionist fits alongside your front desk.</p>
         </div>
       </div>
       <div class="video-card">
@@ -462,9 +715,9 @@
           <video controls preload="metadata" src="videos/ai-whatsapp.mp4"></video>
         </div>
         <div class="video-info">
-          <span class="tag">02 · Booking</span>
-          <h3>A patient books in under a minute</h3>
-          <p>From "I need a doctor" to a confirmed slot — no phone call, no waiting for a reply.</p>
+          <span class="tag">02 · Appointment booking</span>
+          <h3>From enquiry to confirmed appointment</h3>
+          <p>A patient asks for an appointment, checks availability and receives a confirmed slot without the usual back-and-forth.</p>
         </div>
       </div>
       <div class="video-card">
@@ -472,9 +725,9 @@
           <video controls preload="metadata" src="videos/answers-whatsapp.mp4"></video>
         </div>
         <div class="video-info">
-          <span class="tag">03 · Questions</span>
-          <h3>Common questions, answered instantly</h3>
-          <p>Hours, location, prices, which doctors are in today — answered the moment they're asked.</p>
+          <span class="tag">03 · Patient questions</span>
+          <h3>Routine questions answered instantly</h3>
+          <p>Hours, location, prices and doctor availability can be answered when patients ask — without waiting for your receptionist to reply.</p>
         </div>
       </div>
       <div class="video-card">
@@ -482,9 +735,9 @@
           <video controls preload="metadata" src="videos/reminders.mp4"></video>
         </div>
         <div class="video-info">
-          <span class="tag">04 · Reminders &amp; Waitlist</span>
-          <h3>Reminders and the waitlist, in action</h3>
-          <p>Automatic reminders before the visit, and how a cancelled slot gets offered straight to the next patient in line.</p>
+          <span class="tag">04 · Reminders &amp; waitlist</span>
+          <h3>Keep appointments moving</h3>
+          <p>Automatic reminders before visits and waitlist handling when a cancelled slot becomes available.</p>
         </div>
       </div>
     </div>
@@ -494,29 +747,30 @@
 <section class="alt">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">For clinics and doctors</p>
-      <h2>What it actually does</h2>
+      <p class="eyebrow">Built for the whole facility</p>
+      <h2>What changes for your patients, staff and management</h2>
+      <p>ClinicBook Pro is not just a chatbot. It is a patient communication workflow designed to take routine work off the front desk while keeping your staff in control.</p>
     </div>
     <div class="intake">
       <div class="intake-row">
         <div class="box"></div>
-        <div class="txt"><strong>Answers routine questions on its own</strong><span>Opening hours, location, prices, which doctors are available today.</span></div>
+        <div class="txt"><strong>Patients get answers without waiting</strong><span>Opening hours, location, prices, services and doctor availability can be handled automatically.</span></div>
       </div>
       <div class="intake-row">
         <div class="box"></div>
-        <div class="txt"><strong>Books and reschedules appointments</strong><span>No back-and-forth. The patient picks a slot, it's confirmed.</span></div>
+        <div class="txt"><strong>Appointments move from conversation to confirmation</strong><span>Patients can book or reschedule against the availability you provide.</span></div>
       </div>
       <div class="intake-row">
         <div class="box"></div>
-        <div class="txt"><strong>Sends reminders before the visit</strong><span>Fewer no-shows, without anyone having to remember to call.</span></div>
+        <div class="txt"><strong>Patients receive appointment reminders</strong><span>Reduce the amount of manual reminder work your staff has to remember to do.</span></div>
       </div>
       <div class="intake-row">
         <div class="box"></div>
-        <div class="txt"><strong>Hands off anything complicated</strong><span>Your front desk takes over instantly for anything the AI shouldn't decide alone.</span></div>
+        <div class="txt"><strong>Your staff stays in control</strong><span>Complex conversations can be handed to your front desk instead of being decided by the AI alone.</span></div>
       </div>
       <div class="intake-row">
         <div class="box"></div>
-        <div class="txt"><strong>Works around the clock</strong><span>Nights, weekends, between patients — whenever someone messages.</span></div>
+        <div class="txt"><strong>Patient communication doesn't stop after hours</strong><span>Patients can start conversations at night, on weekends or while your staff is busy.</span></div>
       </div>
     </div>
   </div>
@@ -525,9 +779,9 @@
 <section id="tour">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">Beyond the receptionist</p>
-      <h2>See the rest of the app</h2>
-      <p>The WhatsApp AI receptionist is one part of ClinicBook Pro. Here's the rest — the dashboards and tools your doctors and front desk use every day.</p>
+      <p class="eyebrow">More than WhatsApp</p>
+      <h2>The tools behind the patient conversation</h2>
+      <p>ClinicBook Pro also gives doctors, reception staff and administrators the tools they need to manage the appointments and workflows behind the conversations.</p>
     </div>
     <div class="video-grid" id="appTourGrid"></div>
   </div>
@@ -536,9 +790,9 @@
 <section id="how">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">How it works</p>
-      <h2>Where a message goes</h2>
-      <p>This isn't replacing your receptionist. It's filtering what reaches them.</p>
+      <p class="eyebrow">AI + your front desk</p>
+      <h2>Your receptionist stays in control.</h2>
+      <p>ClinicBook Pro handles the repetitive conversations. Your staff handles the conversations that need human judgment.</p>
     </div>
     <div class="flow">
       <div class="flow-step">
@@ -548,18 +802,18 @@
       </div>
       <div class="flow-step">
         <span class="n">02</span>
-        <h4>Routine? Answered.</h4>
-        <p>Hours, prices, availability — handled on the spot.</p>
+        <h4>Routine question? Answered.</h4>
+        <p>Common questions about hours, services, prices and availability can be handled immediately.</p>
       </div>
       <div class="flow-step">
         <span class="n">03</span>
-        <h4>Wants an appointment? Booked.</h4>
-        <p>Checked against real availability, confirmed instantly.</p>
+        <h4>Needs an appointment? Booked.</h4>
+        <p>Availability is checked and the selected appointment can be confirmed through the conversation.</p>
       </div>
       <div class="flow-step escalate">
         <span class="n">04</span>
-        <h4>Anything else → your staff</h4>
-        <p>Flagged and handed to a human, immediately.</p>
+        <h4>Needs a human → your staff.</h4>
+        <p>Complex or unsuitable requests are handed to your team instead of being decided by the AI.</p>
       </div>
     </div>
   </div>
@@ -568,41 +822,42 @@
 <section class="alt">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">Fits into what you already have</p>
-      <h2>Works seamlessly with your existing hospital system</h2>
+      <p class="eyebrow">Designed to fit your workflow</p>
+      <h2>Add a WhatsApp communication layer without replacing your existing systems.</h2>
+      <p>ClinicBook Pro is designed to work alongside your existing hospital or clinic operations and front desk.</p>
     </div>
 
     <div style="display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:start;" class="integration-grid">
       <div>
         <p style="font-size:16px; color:var(--ink-soft); max-width:56ch;">
-          Our AI receptionist is designed to complement — not replace — your existing hospital management system and reception staff.
+          ClinicBook Pro is designed to complement — not replace — your existing hospital management system and reception staff.
         </p>
         <p style="font-size:16px; color:var(--ink-soft); max-width:56ch; margin-top:16px;">
-          It acts as an intelligent communication layer on WhatsApp, handling routine patient interactions: appointment bookings, common questions, doctor availability, reminders, and rescheduling requests.
+          It acts as a patient communication layer on WhatsApp, handling routine interactions such as appointment bookings, common questions, doctor availability, reminders and rescheduling requests.
         </p>
         <p style="font-size:16px; color:var(--ink-soft); max-width:56ch; margin-top:16px;">
-          Appointments made through the AI sync with your existing workflow, so receptionists see scheduled patients before they arrive. That means fewer phone calls, less repetitive admin work, and shorter response times — freeing staff to focus on in-person care and the cases that actually need a human.
+          The goal is to keep patient communication connected to the workflow your team already uses. That means less repetitive messaging and more time for reception staff to focus on patients and cases that actually need a human.
         </p>
         <p style="font-size:16.5px; color:var(--ink); font-weight:600; margin-top:20px;">
-          Faster patient service. Better staff efficiency. Nothing about your current systems has to change.
+          Faster patient response. Less repetitive communication. Your existing team stays in control.
         </p>
       </div>
 
       <div class="flow" style="flex-direction:column;">
         <div class="flow-step">
           <span class="n">YOUR SYSTEM</span>
-          <h4>Existing hospital management system</h4>
-          <p>Stays exactly as it is — no migration, no re-training.</p>
+          <h4>Your existing systems</h4>
+          <p>Your current clinical and administrative workflows remain in place.</p>
         </div>
         <div class="flow-step">
           <span class="n">SYNCS WITH</span>
-          <h4>ClinicBook Pro AI Receptionist</h4>
-          <p>Handles bookings, FAQs, availability, and reminders on WhatsApp.</p>
+          <h4>ClinicBook Pro</h4>
+          <p>Adds WhatsApp-based patient communication, booking, FAQs, availability and reminders.</p>
         </div>
         <div class="flow-step escalate">
           <span class="n">SEEN BY</span>
           <h4>Your front desk staff</h4>
-          <p>Sees every scheduled patient before they walk in — nothing hidden.</p>
+          <p>Remains responsible for conversations and situations that need human attention.</p>
         </div>
       </div>
     </div>
@@ -611,19 +866,16 @@
 
 <section class="final-cta" id="contact">
   <div class="wrap">
-    <p class="eyebrow">Ready when you are</p>
-    <h2>See it running on your own clinic's number</h2>
-    <p>A 15-minute call. No commitment — just a live look at how it would handle your patients.</p>
-    <div class="cta-row">
-      <a href="mailto:alfred@clinicbookpro.com?subject=Live%20demo%20request" class="btn btn-primary">Book a live demo</a>
-      <a href="https://wa.me/254708910797" class="btn btn-ghost">Message on WhatsApp</a>
-    </div>
+    <p class="eyebrow">See what it could look like for your facility</p>
+    <h2>Let's put ClinicBook Pro in the context of your patient workflow.</h2>
+    <p>In 15 minutes, we'll show you how it can handle a typical patient enquiry, appointment booking and staff handoff. No long presentation. No obligation.</p>
+    <p style="font-size:14.5px; margin-top:6px;">Use the buttons in the bottom-right corner to book a demo or message us on WhatsApp.</p>
   </div>
 </section>
 
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
-    <span>ClinicBook Pro — built for clinics in Kenya</span>
+    <span>ClinicBook Pro — WhatsApp patient communication for clinics and hospitals</span>
     <span>contact: alfred@clinicbookpro.com</span>
   </div>
 </footer>
@@ -738,6 +990,38 @@
   }
 
   renderTourGrid();
+
+  // Floating nav menu (hamburger)
+  (function(){
+    const wrap = document.getElementById('floatingMenuWrap');
+    const btn = document.getElementById('floatingMenuBtn');
+    const menu = document.getElementById('floatingMenu');
+    if(!wrap || !btn || !menu) return;
+
+    function closeMenu(){
+      wrap.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      menu.setAttribute('aria-hidden','true');
+    }
+
+    btn.addEventListener('click', function(){
+      const open = wrap.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-hidden', String(!open));
+    });
+
+    menu.querySelectorAll('a[href^="#"]').forEach(function(link){
+      link.addEventListener('click', function(){ closeMenu(); });
+    });
+
+    document.addEventListener('click', function(e){
+      if(!wrap.contains(e.target)) closeMenu();
+    });
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeMenu();
+    });
+  })();
 </script>
 
 </body>
