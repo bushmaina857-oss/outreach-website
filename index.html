@@ -7,710 +7,248 @@
 <meta name="description" content="ClinicBook Pro helps clinics and hospitals answer patient questions, book appointments, send reminders, and hand complex conversations to staff through WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#FAFAFA;
-    --surface:#FFFFFF;
-    --surface-tint:#F4F6F4;
-    --surface-card:#FFFFFF;
-    --border:#E2E8E4;
-    --border-dark:#CBD5CD;
-    --text:#111814;
-    --text-muted:#4E5D55;
-    --text-light:#7A8C83;
-    
-    --primary:#065F46;
-    --primary-hover:#044E38;
-    --primary-light:#E6F4EA;
-    --accent:#E05638;
-    --accent-light:#FDF0EC;
-    
-    --wa-green:#25D366;
-    
-    --radius-sm:6px;
-    --radius-md:12px;
-    --radius-lg:20px;
-    --radius-full:9999px;
-    
-    --shadow-sm:0 1px 3px rgba(17,24,20,0.04), 0 1px 2px rgba(17,24,20,0.06);
-    --shadow-md:0 10px 25px -5px rgba(17,24,20,0.05), 0 8px 10px -6px rgba(17,24,20,0.04);
-    --shadow-lg:0 20px 40px -15px rgba(17,24,20,0.08);
+    --bg:#FFFFFF;
+    --soft:#F2F6F4;
+    --ink:#14201D;
+    --muted:#4F5F5A;
+    --line:#DCE4E0;
+    --green:#0E7C5A;
+    --green-dark:#0A5E44;
+    --deep:#0C2B25;
+    --wa-bg:#EFE7DC;
+    --wa-head:#0B6B55;
+    --wa-out:#D9FDD3;
   }
-
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
-  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;} *{animation:none !important; transition:none !important;}}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Figtree',system-ui,sans-serif; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  :focus-visible{outline:3px solid var(--green); outline-offset:3px;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 24px;}
+  h1,h2,h3,h4{font-family:'Bricolage Grotesque','Figtree',sans-serif; line-height:1.15; margin:0; letter-spacing:-0.02em;}
+  p{margin:0;}
+  .label{font-size:15px; font-weight:600; color:var(--green); margin-bottom:12px;}
 
-  body{
-    margin:0;
-    background-color:var(--bg);
-    color:var(--text);
-    font-family:'Plus Jakarta Sans', sans-serif;
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
+  /* header */
+  header.site{position:sticky; top:0; z-index:50; background:var(--bg); border-bottom:1px solid var(--line);}
+  .nav{display:flex; align-items:center; justify-content:space-between; height:68px; gap:20px;}
+  .brand{font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:21px; text-decoration:none; letter-spacing:-0.02em;}
+  .brand b{color:var(--green); font-weight:700;}
+  .links{display:flex; gap:26px; font-size:15.5px;}
+  .links a{text-decoration:none; color:var(--muted);}
+  .links a:hover{color:var(--ink);}
+  .btn{display:inline-block; font:600 16px 'Figtree',sans-serif; padding:13px 22px; border-radius:8px; text-decoration:none; border:2px solid transparent; cursor:pointer;}
+  .btn-solid{background:var(--green); color:#fff;}
+  .btn-solid:hover{background:var(--green-dark);}
+  .btn-line{border-color:var(--ink); color:var(--ink);}
+  .btn-line:hover{background:var(--ink); color:#fff;}
+  .nav .btn{padding:9px 16px; font-size:15px;}
 
-  a{color:inherit; text-decoration:none;}
-  :focus-visible{outline:2px solid var(--primary); outline-offset:2px;}
+  /* hero */
+  .hero{padding:72px 0 80px;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:64px; align-items:center;}
+  .hero h1{font-size:clamp(2.2rem,4.6vw,3.6rem); font-weight:700; max-width:15ch;}
+  .hero .lede{margin-top:22px; font-size:19px; color:var(--muted); max-width:46ch;}
+  .hero .note{margin-top:14px; font-weight:600; font-size:16px;}
+  .hero .actions{margin-top:30px;}
 
-  .wrap{max-width:1160px; margin:0 auto; padding:0 32px;}
+  .phone{width:100%; max-width:340px; margin:0 auto; border:10px solid var(--deep); border-radius:36px; overflow:hidden; background:var(--wa-bg);}
+  .phone-top{background:var(--wa-head); color:#fff; padding:14px 16px; display:flex; align-items:center; gap:12px;}
+  .avatar{width:36px; height:36px; border-radius:50%; background:#fff; color:var(--wa-head); font-weight:700; display:flex; align-items:center; justify-content:center; font-size:14px;}
+  .phone-top strong{display:block; font-size:15.5px; line-height:1.2;}
+  .phone-top span{font-size:12.5px; opacity:.85;}
+  .chat{padding:18px 14px 20px; min-height:340px; display:flex; flex-direction:column; gap:8px;}
+  .bubble{max-width:80%; padding:8px 12px; border-radius:8px; font-size:14.5px; line-height:1.4; background:#fff; box-shadow:0 1px 1px rgba(0,0,0,.12); animation:pop .3s ease both;}
+  .bubble.patient{align-self:flex-end; background:var(--wa-out);}
+  .bubble.ai{align-self:flex-start;}
+  @keyframes pop{from{opacity:0; transform:translateY(6px);}}
 
-  .eyebrow{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.75rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--primary);
-    font-weight:600;
-  }
+  /* audience strip */
+  .strip{background:var(--soft); border-block:1px solid var(--line); padding:30px 0;}
+  .strip p:first-child{font-size:15px; color:var(--muted);}
+  .strip p:last-child{font-family:'Bricolage Grotesque',sans-serif; font-size:22px; font-weight:500; margin-top:4px;}
 
-  h1,h2,h3,h4{
-    font-family:'Instrument Serif', serif;
-    font-weight:400;
-    margin:0;
-    color:var(--text);
-    line-height:1.05;
-  }
+  section{padding:84px 0; scroll-margin-top:68px;}
+  .head{max-width:60ch; margin-bottom:44px;}
+  .head h2{font-size:clamp(1.7rem,3.2vw,2.4rem); font-weight:700;}
+  .head p:last-child{margin-top:14px; color:var(--muted);}
 
-  p{color:var(--text-muted); margin:0;}
+  /* problem: split layout */
+  .split{display:grid; grid-template-columns:.9fr 1.1fr; gap:64px; align-items:start;}
+  .split .head{margin-bottom:0; position:sticky; top:104px;}
+  .rows > div{padding:22px 0; border-top:1px solid var(--line);}
+  .rows > div:last-child{border-bottom:1px solid var(--line);}
+  .rows strong{display:block; font-size:18px; margin-bottom:4px;}
+  .rows span{color:var(--muted);}
+  .rows .answer strong{color:var(--green);}
 
-  /* ---------- NAV ---------- */
-  header.site{
-    padding:20px 0;
-    background:rgba(250,250,250,0.85);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    position:sticky;
-    top:0;
-    z-index:500;
-    border-bottom:1px solid var(--border);
-  }
-  .nav-inner{display:flex; align-items:center; justify-content:space-between;}
-  .brand{
-    font-family:'Plus Jakarta Sans', sans-serif;
-    font-weight:800;
-    font-size:1.15rem;
-    letter-spacing:-0.03em;
-  }
-  .brand span{color:var(--primary);}
-  nav.site-links{display:flex; gap:32px; font-size:0.92rem; font-weight:500;}
-  nav.site-links a{color:var(--text-muted); transition:color 0.15s ease;}
-  nav.site-links a:hover{color:var(--text);}
+  /* videos */
+  .videos{display:grid; grid-template-columns:1fr 1fr; gap:36px 28px;}
+  .vid-frame{aspect-ratio:16/10; background:var(--deep); border-radius:10px; overflow:hidden; display:flex; align-items:center; justify-content:center;}
+  .vid-frame video{width:100%; height:100%; object-fit:cover; display:block;}
+  .play{width:54px; height:54px; border-radius:50%; background:#fff; position:relative;}
+  .play::after{content:""; position:absolute; left:21px; top:16px; border-style:solid; border-width:11px 0 11px 17px; border-color:transparent transparent transparent var(--ink);}
+  .vid-info{padding-top:14px;}
+  .vid-info .tag{font-size:14px; font-weight:600; color:var(--green);}
+  .vid-info h3{font-size:20px; margin-top:2px;}
+  .vid-info p{margin-top:6px; color:var(--muted); font-size:16px;}
 
-  /* ---------- HERO ---------- */
-  .hero{
-    padding:80px 0 100px;
-    position:relative;
-    overflow:hidden;
-  }
-  .hero-grid{
-    display:grid;
-    grid-template-columns:1.1fr 0.9fr;
-    gap:64px;
-    align-items:center;
-  }
-  .hero h1{
-    font-size:clamp(3.2rem, 6vw, 4.8rem);
-    margin-top:16px;
-    letter-spacing:-0.01em;
-  }
-  .hero h1 em{
-    font-style:italic;
-    color:var(--primary);
-  }
-  .hero p.lede{
-    font-size:1.125rem;
-    color:var(--text-muted);
-    max-width:44ch;
-    margin-top:24px;
-    line-height:1.6;
-  }
-  .cta-row{
-    display:flex;
-    gap:12px;
-    margin-top:36px;
-    flex-wrap:wrap;
-  }
-  .btn{
-    font-family:'Plus Jakarta Sans', sans-serif;
-    font-size:0.95rem;
-    font-weight:600;
-    padding:14px 26px;
-    border-radius:var(--radius-full);
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    border:1px solid transparent;
-    cursor:pointer;
-    transition:all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .btn:hover{transform:translateY(-1px); box-shadow:var(--shadow-md);}
-  .btn-primary{background:var(--primary); color:#fff;}
-  .btn-primary:hover{background:var(--primary-hover);}
-  .btn-ghost{background:transparent; color:var(--text); border-color:var(--border-dark);}
-  .btn-ghost:hover{background:var(--surface-tint); border-color:var(--text);}
+  .soft{background:var(--soft);}
 
-  /* ---------- APPOINTMENT CARD (signature element) ---------- */
-  .card-stage{
-    position:relative;
-    display:flex;
-    justify-content:center;
-  }
-  .appt-card{
-    background:var(--surface);
-    width:100%;
-    max-width:380px;
-    padding:24px;
-    border:1px solid var(--border);
-    border-radius:var(--radius-lg);
-    position:relative;
-    box-shadow:var(--shadow-lg);
-  }
-  .appt-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    border-bottom:1px solid var(--border);
-    padding-bottom:16px;
-    margin-bottom:18px;
-  }
-  .appt-head .label{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.7rem;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    color:var(--text-light);
-  }
-  .appt-head .clinic-name{
-    font-family:'Plus Jakarta Sans', sans-serif;
-    font-weight:700;
-    font-size:1rem;
-    margin-top:2px;
-    color:var(--text);
-  }
-  .wa-dot{
-    width:7px; height:7px; border-radius:50%;
-    background:var(--wa-green);
-    display:inline-block;
-    margin-right:6px;
-  }
+  /* benefits */
+  .benefits{display:grid; grid-template-columns:1fr 1fr; gap:0 56px;}
+  .benefits > div{padding:24px 0; border-top:1px solid var(--line);}
+  .benefits strong{display:block; font-size:18px; margin-bottom:4px;}
+  .benefits span{color:var(--muted);}
 
-  .chat{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    min-height:260px;
-  }
-  .bubble{
-    max-width:85%;
-    padding:10px 14px;
-    border-radius:var(--radius-md);
-    font-size:0.9rem;
-    line-height:1.45;
-    opacity:0;
-    transform:translateY(8px);
-    animation:rise 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-  @keyframes rise{ to{opacity:1; transform:translateY(0);} }
-  .bubble.patient{
-    align-self:flex-end;
-    background:var(--surface-tint);
-    color:var(--text);
-    border-bottom-right-radius:4px;
-  }
-  .bubble.ai{
-    align-self:flex-start;
-    background:var(--primary);
-    color:#fff;
-    border-bottom-left-radius:4px;
-  }
+  /* how it works */
+  .steps{display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line); border-radius:10px; overflow:hidden;}
+  .step{padding:26px 22px; border-right:1px solid var(--line);}
+  .step:last-child{border-right:none;}
+  .step .n{font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:30px; color:var(--green);}
+  .step h4{font-size:18px; margin:10px 0 8px;}
+  .step p{font-size:15.5px; color:var(--muted);}
+  .step.human{background:var(--deep); color:#fff;}
+  .step.human .n{color:#7FD3B3;}
+  .step.human p{color:#C4D6CF;}
 
-  .stamp{
-    position:absolute;
-    bottom:24px;
-    right:24px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.75rem;
-    letter-spacing:0.1em;
-    font-weight:700;
-    color:var(--accent);
-    border:2px solid var(--accent);
-    padding:6px 12px;
-    border-radius:var(--radius-sm);
-    transform:rotate(-6deg) scale(0.9);
-    opacity:0;
-    transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    background:var(--accent-light);
-  }
-  .stamp.show{
-    opacity:1;
-    transform:rotate(-6deg) scale(1);
-  }
+  /* integration */
+  .fit{display:grid; grid-template-columns:1.1fr .9fr; gap:64px; align-items:start;}
+  .fit .text p{color:var(--muted); max-width:56ch;}
+  .fit .text p + p{margin-top:16px;}
+  .fit .text .closer{color:var(--ink); font-weight:600; font-size:18px; margin-top:22px;}
+  .stack{position:relative; padding-left:28px;}
+  .stack::before{content:""; position:absolute; left:7px; top:12px; bottom:12px; width:2px; background:var(--line);}
+  .stack > div{position:relative; padding:0 0 28px;}
+  .stack > div:last-child{padding-bottom:0;}
+  .stack > div::before{content:""; position:absolute; left:-27px; top:6px; width:12px; height:12px; border-radius:50%; background:var(--bg); border:2px solid var(--green);}
+  .stack small{font-size:14px; font-weight:600; color:var(--green);}
+  .stack h4{font-size:19px; margin:2px 0 4px;}
+  .stack p{color:var(--muted); font-size:16px;}
 
-  /* ---------- SECTION SHARED ---------- */
-  section{padding:96px 0;}
-  section.alt{background:var(--surface-tint); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
-  .section-head{max-width:60ch; margin-bottom:56px;}
-  .section-head h2{font-size:clamp(2.4rem, 4.5vw, 3.6rem); margin-top:8px;}
-  .section-head p{font-size:1.1rem; margin-top:16px;}
+  /* final cta */
+  .final{background:var(--deep); color:#fff; padding:88px 0;}
+  .final .label{color:#7FD3B3;}
+  .final h2{font-size:clamp(1.8rem,3.6vw,2.7rem); font-weight:700; max-width:22ch;}
+  .final p{color:#C4D6CF; max-width:56ch; margin-top:16px;}
+  .final .actions{display:flex; gap:14px; flex-wrap:wrap; margin-top:30px;}
+  .final .btn-solid{background:#fff; color:var(--deep);}
+  .final .btn-solid:hover{background:#DDEFE7;}
+  .final .btn-line{border-color:#fff; color:#fff;}
+  .final .btn-line:hover{background:#fff; color:var(--deep);}
 
-  /* ---------- VIDEOS ---------- */
-  .video-grid{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:32px;
-  }
-  .video-card{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:var(--radius-lg);
-    overflow:hidden;
-    box-shadow:var(--shadow-sm);
-    transition:all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .video-card:hover{
-    transform:translateY(-4px);
-    box-shadow:var(--shadow-md);
-    border-color:var(--border-dark);
-  }
-  .video-frame{
-    aspect-ratio:16/10;
-    background:#000;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-  }
-  .video-frame video, .video-frame img{
-    width:100%; height:100%; object-fit:cover; display:block;
-  }
-  .play-btn{
-    width:56px; height:56px;
-    border-radius:50%;
-    background:rgba(255,255,255,0.9);
-    display:flex; align-items:center; justify-content:center;
-    position:relative;
-    z-index:2;
-    box-shadow:var(--shadow-md);
-    transition:transform 0.2s ease;
-  }
-  .video-card:hover .play-btn {transform:scale(1.05);}
-  .play-btn::after{
-    content:"";
-    border-style:solid;
-    border-width:8px 0 8px 14px;
-    border-color:transparent transparent transparent var(--text);
-    margin-left:3px;
-  }
-  .video-info{padding:24px;}
-  .video-info .tag{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.7rem;
-    color:var(--primary);
-    text-transform:uppercase;
-    letter-spacing:0.06em;
-    font-weight:600;
-  }
-  .video-info h3{font-family:'Plus Jakarta Sans', sans-serif; font-weight:700; font-size:1.15rem; margin-top:8px;}
-  .video-info p{font-size:0.95rem; margin-top:8px;}
+  footer{padding:26px 0; font-size:14.5px; color:var(--muted); border-top:1px solid var(--line);}
+  footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
 
-  /* ---------- CHECKLIST ---------- */
-  .intake{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:var(--radius-lg);
-    overflow:hidden;
-    box-shadow:var(--shadow-sm);
-  }
-  .intake-row{
-    display:flex;
-    align-items:flex-start;
-    gap:20px;
-    padding:24px 32px;
-    border-bottom:1px solid var(--border);
-    transition:background 0.15s ease;
-  }
-  .intake-row:hover{background:var(--surface-tint);}
-  .intake-row:last-child{border-bottom:none;}
-  .box{
-    width:20px; height:20px;
-    border:2px solid var(--primary);
-    border-radius:4px;
-    flex-shrink:0;
-    margin-top:2px;
-    position:relative;
-    background:var(--primary-light);
-  }
-  .box::after{
-    content:"";
-    position:absolute;
-    left:5px; top:1px;
-    width:6px; height:10px;
-    border-right:2px solid var(--primary);
-    border-bottom:2px solid var(--primary);
-    transform:rotate(40deg);
-  }
-  .intake-row .txt strong{display:block; font-size:1.02rem; margin-bottom:4px; color:var(--text); font-weight:700;}
-  .intake-row .txt span{color:var(--text-muted); font-size:0.95rem;}
+  /* whatsapp button */
+  .wa-fab{position:fixed; right:20px; bottom:20px; z-index:60; width:56px; height:56px; border-radius:50%; background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px rgba(0,0,0,.25);}
+  .wa-fab:hover{background:#1EBE5D;}
+  .wa-fab svg{width:28px; height:28px; fill:currentColor;}
 
-  /* ---------- FLOW ---------- */
-  .flow{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:16px;
+  @media (max-width:860px){
+    .links{display:none;}
+    .hero{padding:48px 0 56px;}
+    .hero-grid,.split,.fit{grid-template-columns:1fr; gap:40px;}
+    .split .head{position:static;}
+    .videos,.benefits{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr 1fr;}
+    .step:nth-child(2){border-right:none;}
+    .step:nth-child(-n+2){border-bottom:1px solid var(--line);}
+    section{padding:60px 0;}
   }
-  .flow-step{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:var(--radius-lg);
-    padding:28px 24px;
-    position:relative;
-    box-shadow:var(--shadow-sm);
-  }
-  .flow-step .n{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.75rem;
-    color:var(--primary);
-    letter-spacing:0.06em;
-    font-weight:600;
-  }
-  .flow-step h4{
-    font-family:'Plus Jakarta Sans', sans-serif;
-    font-size:1.1rem;
-    font-weight:700;
-    margin:12px 0 8px;
-    color:var(--text);
-  }
-  .flow-step p{font-size:0.9rem; color:var(--text-muted); margin:0;}
-  .flow-step.escalate{background:var(--text); color:#fff; border-color:var(--text);}
-  .flow-step.escalate .n{color:#86EFAC;}
-  .flow-step.escalate h4{color:#fff;}
-  .flow-step.escalate p{color:#D1D5DB;}
-
-  /* ---------- FOOTER CTA ---------- */
-  .final-cta{
-    text-align:center;
-    padding:110px 0 120px;
-  }
-  .final-cta h2{font-size:clamp(2.6rem, 5vw, 3.8rem); max-width:18ch; margin:16px auto 0;}
-  .final-cta p{color:var(--text-muted); margin-top:20px; max-width:48ch; margin-left:auto; margin-right:auto; font-size:1.1rem;}
-  .final-cta .cta-row{justify-content:center; margin-top:40px;}
-
-  footer{
-    border-top:1px solid var(--border);
-    padding:32px 0;
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.8rem;
-    color:var(--text-light);
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:16px;
-    background:var(--surface);
-  }
-
-  @media (max-width:960px){
-    .hero-grid{grid-template-columns:1fr; gap:48px;}
-    .video-grid{grid-template-columns:1fr;}
-    .flow{grid-template-columns:1fr;}
-    .integration-grid{grid-template-columns:1fr !important;}
-    nav.site-links{display:none;}
-  }
-
-  /* ---------- FLOATING ACTION BUTTONS ---------- */
-  .floating-actions{
-    position:fixed;
-    right:28px;
-    bottom:28px;
-    z-index:9000;
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-  .floating-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    height:52px;
-    padding:0 22px;
-    border-radius:var(--radius-full);
-    text-decoration:none;
-    font-family:'Plus Jakarta Sans', sans-serif;
-    font-size:0.92rem;
-    font-weight:700;
-    box-shadow:var(--shadow-md);
-    transition:all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .floating-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:var(--shadow-lg);
-  }
-  .floating-book{
-    background:var(--text);
-    color:#fff;
-  }
-  .floating-book:hover{background:var(--primary);}
-  .floating-whatsapp{
-    width:52px;
-    height:52px;
-    padding:0;
-    border-radius:50%;
-    background:var(--wa-green);
-    color:#fff;
-  }
-  .floating-whatsapp:hover{background:#1da851;}
-  .whatsapp-icon{
-    width:26px;
-    height:26px;
-    display:block;
-    fill:currentColor;
-  }
-
-  @media (max-width:600px){
-    .floating-actions{
-      right:16px;
-      bottom:16px;
-      left:16px;
-      justify-content:flex-end;
-    }
-    .floating-book{
-      flex:1;
-      max-width:220px;
-    }
-    .floating-whatsapp{
-      flex:0 0 52px;
-    }
-  }
-
-  /* ---------- FLOATING NAV MENU ---------- */
-  .floating-menu-wrap{
-    position:fixed;
-    top:20px;
-    right:32px;
-    z-index:9500;
-  }
-  .floating-menu-btn{
-    width:52px;
-    height:52px;
-    border:1px solid var(--border);
-    border-radius:var(--radius-md);
-    background:rgba(255,255,255,0.9);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    box-shadow:var(--shadow-sm);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    gap:5px;
-    cursor:pointer;
-    padding:0;
-    transition:all 0.2s ease;
-  }
-  .floating-menu-btn:hover{border-color:var(--border-dark); background:#fff;}
-  .floating-menu-btn span{
-    display:block;
-    width:20px;
-    height:2px;
-    border-radius:var(--radius-full);
-    background:var(--text);
-    transition:transform .2s ease, opacity .2s ease;
-  }
-  .floating-menu-wrap.open .floating-menu-btn span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-  .floating-menu-wrap.open .floating-menu-btn span:nth-child(2){opacity:0;}
-  .floating-menu-wrap.open .floating-menu-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-  .floating-menu-dropdown{
-    position:absolute;
-    top:64px;
-    right:0;
-    width:220px;
-    padding:8px;
-    border:1px solid var(--border);
-    border-radius:var(--radius-md);
-    background:var(--surface);
-    box-shadow:var(--shadow-lg);
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(-6px) scale(.98);
-    transform-origin:top right;
-    transition:opacity .15s ease, transform .15s ease, visibility .15s ease;
-  }
-  .floating-menu-wrap.open .floating-menu-dropdown{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0) scale(1);
-  }
-  .floating-menu-dropdown a{
-    display:block;
-    padding:10px 14px;
-    border-radius:var(--radius-sm);
-    color:var(--text);
-    text-decoration:none;
-    font-weight:600;
-    font-size:0.9rem;
-    transition:background .15s ease, color .15s ease;
-  }
-  .floating-menu-dropdown a:hover{
-    background:var(--surface-tint);
-    color:var(--primary);
+  @media (max-width:520px){
+    .steps{grid-template-columns:1fr;}
+    .step{border-right:none; border-bottom:1px solid var(--line);}
+    .step:last-child{border-bottom:none;}
+    .nav .btn{padding:8px 12px; font-size:14px;}
   }
 </style>
 </head>
 <body>
 
-<div class="floating-actions" aria-label="Quick actions">
-  <a href="mailto:alfred@clinicbookpro.com?subject=Live%20demo%20request" class="floating-btn floating-book">
-    Book a 15-minute demo
-  </a>
-  <a href="https://wa.me/254708910797" class="floating-btn floating-whatsapp" aria-label="Message ClinicBook Pro on WhatsApp" title="Message us on WhatsApp">
-    <svg class="whatsapp-icon" viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M19.11 17.2c-.27-.14-1.58-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.15-1.34-.8-.71-1.34-1.58-1.5-1.85-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27s.98 2.64 1.11 2.82c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.26.18 1.74.11.53-.08 1.58-.65 1.8-1.27.23-.62.23-1.15.16-1.27-.07-.11-.25-.18-.52-.32z"/>
-      <path d="M16.01 3.2c-7.07 0-12.81 5.74-12.81 12.81 0 2.26.59 4.47 1.72 6.41L3.1 28.8l6.53-1.72a12.75 12.75 0 0 0 6.38 1.72h.01c7.06 0 12.8-5.74 12.8-12.81S23.08 3.2 16.01 3.2zm0 23.42h-.01a10.62 10.62 0 0 1-5.41-1.48l-.39-.23-3.88 1.02 1.04-3.78-.25-.39a10.6 10.6 0 1 1 8.9 4.86z"/>
-    </svg>
-  </a>
-</div>
-
-<div class="floating-menu-wrap" id="floatingMenuWrap">
-  <button class="floating-menu-btn" id="floatingMenuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="floatingMenu">
-    <span></span><span></span><span></span>
-  </button>
-  <div class="floating-menu-dropdown" id="floatingMenu" aria-hidden="true">
-    <a href="#problem">The problem</a>
-    <a href="#demo">See it in action</a>
-    <a href="#tour">Full app tour</a>
-    <a href="#how">How it works</a>
-  </div>
-</div>
-
 <header class="site">
-  <div class="wrap nav-inner">
-    <div class="brand">ClinicBook <span>Pro</span></div>
-    <nav class="site-links">
+  <div class="wrap nav">
+    <a href="#" class="brand">ClinicBook <b>Pro</b></a>
+    <nav class="links" aria-label="Main">
       <a href="#problem">The problem</a>
       <a href="#demo">See it in action</a>
       <a href="#tour">Full app tour</a>
       <a href="#how">How it works</a>
-      <a href="#contact">Book a demo</a>
     </nav>
+    <a href="mailto:alfred@clinicbookpro.com?subject=Live%20demo%20request" class="btn btn-solid">Book a demo</a>
   </div>
 </header>
 
-<section class="hero">
+<main>
+<div class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">WhatsApp Patient Communication for Clinics & Hospitals</span>
-      <h1>Turn patient WhatsApp enquiries into <em>booked appointments.</em></h1>
+      <p class="label">WhatsApp Patient Communication for Clinics &amp; Hospitals</p>
+      <h1>Turn patient WhatsApp enquiries into booked appointments.</h1>
       <p class="lede">ClinicBook Pro gives your facility a WhatsApp AI receptionist that answers routine questions, checks availability, books and reschedules appointments, sends reminders, and hands complex conversations to your staff.</p>
-      <p class="lede" style="font-size:0.95rem; margin-top:12px; color:var(--text);"><strong>Works alongside your front desk — not instead of it.</strong></p>
-      <div class="cta-row">
-        <a href="#demo" class="btn btn-primary">▶ See it in action</a>
-      </div>
+      <p class="note">Works alongside your front desk — not instead of it.</p>
+      <div class="actions"><a href="#demo" class="btn btn-solid">▶ See it in action</a></div>
     </div>
-
-    <div class="card-stage">
-      <div class="appt-card" id="apptCard">
-        <div class="appt-head">
-          <div>
-            <span class="label"><span class="wa-dot"></span>WhatsApp</span>
-            <div class="clinic-name">City Clinic — Dental</div>
-          </div>
-          <span class="label">Today</span>
-        </div>
-        <div class="chat" id="chatLog"></div>
-        <div class="stamp" id="stamp">CONFIRMED ✓</div>
+    <div class="phone" id="phone" aria-label="Example WhatsApp booking conversation">
+      <div class="phone-top">
+        <div class="avatar">CC</div>
+        <div><strong>City Clinic — Dental</strong><span>WhatsApp · Today</span></div>
       </div>
+      <div class="chat" id="chatLog"></div>
     </div>
   </div>
-</section>
+</div>
 
-<section style="padding:28px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--surface);">
-  <div class="wrap" style="text-align:center;">
-    <span class="eyebrow" style="margin:0;">For hospital owners · administrators · clinic managers · medical directors</span>
-    <p style="margin:6px auto 0; font-size:1.05rem; color:var(--text); max-width:70ch; font-weight:500;">Improve patient response without adding another person to the front desk.</p>
+<div class="strip">
+  <div class="wrap">
+    <p>For hospital owners, administrators, clinic managers and medical directors</p>
+    <p>Improve patient response without adding another person to the front desk.</p>
   </div>
-</section>
+</div>
 
 <section id="problem">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">The patient communication problem</span>
-      <h2>Your front desk shouldn't have to answer the same question all day.</h2>
+  <div class="wrap split">
+    <div class="head">
+      <p class="label">The patient communication problem</p>
+      <h2>Your front desk shouldn’t have to answer the same question all day.</h2>
       <p>Patients want quick answers. Your staff may already be answering calls, serving patients, checking schedules and handling administrative work.</p>
     </div>
-    <div class="intake">
-      <div class="intake-row">
-        <div class="box"></div>
-        <div class="txt"><strong>A patient asks a routine question</strong><span>"Is the doctor available tomorrow?" "How much is consultation?" "What time do you open?"</span></div>
-      </div>
-      <div class="intake-row">
-        <div class="box"></div>
-        <div class="txt"><strong>Your staff may already be busy</strong><span>The message waits while the receptionist handles calls, walk-ins and other patients.</span></div>
-      </div>
-      <div class="intake-row">
-        <div class="box"></div>
-        <div class="txt"><strong>Booking can become a back-and-forth conversation</strong><span>Patients ask about availability, choose a time, reschedule and ask follow-up questions.</span></div>
-      </div>
-      <div class="intake-row">
-        <div class="box"></div>
-        <div class="txt"><strong>ClinicBook Pro handles the routine</strong><span>Patients can get answers and move toward an appointment while your team stays available for the work that needs a human.</span></div>
-      </div>
+    <div class="rows">
+      <div><strong>A patient asks a routine question</strong><span>“Is the doctor available tomorrow?” “How much is consultation?” “What time do you open?”</span></div>
+      <div><strong>Your staff may already be busy</strong><span>The message waits while the receptionist handles calls, walk-ins and other patients.</span></div>
+      <div><strong>Booking can become a back-and-forth conversation</strong><span>Patients ask about availability, choose a time, reschedule and ask follow-up questions.</span></div>
+      <div class="answer"><strong>ClinicBook Pro handles the routine</strong><span>Patients can get answers and move toward an appointment while your team stays available for the work that needs a human.</span></div>
     </div>
   </div>
 </section>
 
-<section id="demo" class="alt">
+<section id="demo" class="soft">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">See it in action</span>
-      <h2>Don't just read about it. Watch the patient journey.</h2>
+    <div class="head">
+      <p class="label">See it in action</p>
+      <h2>Don’t just read about it. Watch the patient journey.</h2>
       <p>These videos show ClinicBook Pro handling real patient-service workflows on WhatsApp — from questions and booking to reminders and waitlist management.</p>
     </div>
-    <div class="video-grid">
-      <div class="video-card">
-        <div class="video-frame">
-          <video controls preload="metadata" src="videos/overview.mp4"></video>
-        </div>
-        <div class="video-info">
-          <span class="tag">01 · The solution</span>
-          <h3>What ClinicBook Pro does</h3>
-          <p>See the patient communication problem we are solving and how the WhatsApp AI receptionist fits alongside your front desk.</p>
-        </div>
+    <div class="videos">
+      <div>
+        <div class="vid-frame"><video controls preload="metadata" src="videos/overview.mp4"></video></div>
+        <div class="vid-info"><span class="tag">01 · The solution</span><h3>What ClinicBook Pro does</h3><p>See the patient communication problem we are solving and how the WhatsApp AI receptionist fits alongside your front desk.</p></div>
       </div>
-      <div class="video-card">
-        <div class="video-frame">
-          <video controls preload="metadata" src="videos/ai-whatsapp.mp4"></video>
-        </div>
-        <div class="video-info">
-          <span class="tag">02 · Appointment booking</span>
-          <h3>From enquiry to confirmed appointment</h3>
-          <p>A patient asks for an appointment, checks availability and receives a confirmed slot without the usual back-and-forth.</p>
-        </div>
+      <div>
+        <div class="vid-frame"><video controls preload="metadata" src="videos/ai-whatsapp.mp4"></video></div>
+        <div class="vid-info"><span class="tag">02 · Appointment booking</span><h3>From enquiry to confirmed appointment</h3><p>A patient asks for an appointment, checks availability and receives a confirmed slot without the usual back-and-forth.</p></div>
       </div>
-      <div class="video-card">
-        <div class="video-frame">
-          <video controls preload="metadata" src="videos/answers-whatsapp.mp4"></video>
-        </div>
-        <div class="video-info">
-          <span class="tag">03 · Patient questions</span>
-          <h3>Routine questions answered instantly</h3>
-          <p>Hours, location, prices and doctor availability can be answered when patients ask — without waiting for your receptionist to reply.</p>
-        </div>
+      <div>
+        <div class="vid-frame"><video controls preload="metadata" src="videos/answers-whatsapp.mp4"></video></div>
+        <div class="vid-info"><span class="tag">03 · Patient questions</span><h3>Routine questions answered instantly</h3><p>Hours, location, prices and doctor availability can be answered when patients ask — without waiting for your receptionist to reply.</p></div>
       </div>
-      <div class="video-card">
-        <div class="video-frame">
-          <video controls preload="metadata" src="videos/reminders.mp4"></video>
-        </div>
-        <div class="video-info">
-          <span class="tag">04 · Reminders &amp; waitlist</span>
-          <h3>Keep appointments moving</h3>
-          <p>Automatic reminders before visits and waitlist handling when a cancelled slot becomes available.</p>
-        </div>
+      <div>
+        <div class="vid-frame"><video controls preload="metadata" src="videos/reminders.mp4"></video></div>
+        <div class="vid-info"><span class="tag">04 · Reminders &amp; waitlist</span><h3>Keep appointments moving</h3><p>Automatic reminders before visits and waitlist handling when a cancelled slot becomes available.</p></div>
       </div>
     </div>
   </div>
@@ -718,268 +256,137 @@
 
 <section>
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Built for the whole facility</span>
+    <div class="head">
+      <p class="label">Built for the whole facility</p>
       <h2>What changes for your patients, staff and management</h2>
       <p>ClinicBook Pro is not just a chatbot. It is a patient communication workflow designed to take routine work off the front desk while keeping your staff in control.</p>
     </div>
-    <div class="intake">
-      <div class="intake-row">
-        <div class="box"></div>
-        <div class="txt"><strong>Patients get answers without waiting</strong><span>Opening hours, location, prices, services and doctor availability can be handled automatically.</span></div>
-      </div>
-      <div class="intake-row">
-        <div class="box"></div>
-        <div class="txt"><strong>Appointments move from conversation to confirmation</strong><span>Patients can book or reschedule against the availability you provide.</span></div>
-      </div>
-      <div class="intake-row">
-        <div class="box"></div>
-        <div class="txt"><strong>Patients receive appointment reminders</strong><span>Reduce the amount of manual reminder work your staff has to remember to do.</span></div>
-      </div>
-      <div class="intake-row">
-        <div class="box"></div>
-        <div class="txt"><strong>Your staff stays in control</strong><span>Complex conversations can be handed to your front desk instead of being decided by the AI alone.</span></div>
-      </div>
-      <div class="intake-row">
-        <div class="box"></div>
-        <div class="txt"><strong>Patient communication doesn't stop after hours</strong><span>Patients can start conversations at night, on weekends or while your staff is busy.</span></div>
-      </div>
+    <div class="benefits">
+      <div><strong>Patients get answers without waiting</strong><span>Opening hours, location, prices, services and doctor availability can be handled automatically.</span></div>
+      <div><strong>Appointments move from conversation to confirmation</strong><span>Patients can book or reschedule against the availability you provide.</span></div>
+      <div><strong>Patients receive appointment reminders</strong><span>Reduce the amount of manual reminder work your staff has to remember to do.</span></div>
+      <div><strong>Your staff stays in control</strong><span>Complex conversations can be handed to your front desk instead of being decided by the AI alone.</span></div>
+      <div><strong>Patient communication doesn’t stop after hours</strong><span>Patients can start conversations at night, on weekends or while your staff is busy.</span></div>
     </div>
   </div>
 </section>
 
-<section id="tour" class="alt">
+<section id="tour" class="soft">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">More than WhatsApp</span>
+    <div class="head">
+      <p class="label">More than WhatsApp</p>
       <h2>The tools behind the patient conversation</h2>
       <p>ClinicBook Pro also gives doctors, reception staff and administrators the tools they need to manage the appointments and workflows behind the conversations.</p>
     </div>
-    <div class="video-grid" id="appTourGrid"></div>
+    <div class="videos" id="appTourGrid"></div>
   </div>
 </section>
 
 <section id="how">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">AI + your front desk</span>
+    <div class="head">
+      <p class="label">AI + your front desk</p>
       <h2>Your receptionist stays in control.</h2>
       <p>ClinicBook Pro handles the repetitive conversations. Your staff handles the conversations that need human judgment.</p>
     </div>
-    <div class="flow">
-      <div class="flow-step">
-        <span class="n">01</span>
-        <h4>Patient sends a message</h4>
-        <p>Any question, in their own words, on WhatsApp.</p>
-      </div>
-      <div class="flow-step">
-        <span class="n">02</span>
-        <h4>Routine question? Answered.</h4>
-        <p>Common questions about hours, services, prices and availability can be handled immediately.</p>
-      </div>
-      <div class="flow-step">
-        <span class="n">03</span>
-        <h4>Needs an appointment? Booked.</h4>
-        <p>Availability is checked and the selected appointment can be confirmed through the conversation.</p>
-      </div>
-      <div class="flow-step escalate">
-        <span class="n">04</span>
-        <h4>Needs a human → your staff.</h4>
-        <p>Complex or unsuitable requests are handed to your team instead of being decided by the AI.</p>
-      </div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h4>Patient sends a message</h4><p>Any question, in their own words, on WhatsApp.</p></div>
+      <div class="step"><div class="n">2</div><h4>Routine question? Answered.</h4><p>Common questions about hours, services, prices and availability can be handled immediately.</p></div>
+      <div class="step"><div class="n">3</div><h4>Needs an appointment? Booked.</h4><p>Availability is checked and the selected appointment can be confirmed through the conversation.</p></div>
+      <div class="step human"><div class="n">4</div><h4>Needs a human → your staff.</h4><p>Complex or unsuitable requests are handed to your team instead of being decided by the AI.</p></div>
     </div>
   </div>
 </section>
 
-<section class="alt">
+<section class="soft">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Designed to fit your workflow</span>
+    <div class="head">
+      <p class="label">Designed to fit your workflow</p>
       <h2>Add a WhatsApp communication layer without replacing your existing systems.</h2>
       <p>ClinicBook Pro is designed to work alongside your existing hospital or clinic operations and front desk.</p>
     </div>
-
-    <div style="display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:start;" class="integration-grid">
-      <div>
-        <p style="font-size:1.05rem; color:var(--text-muted); max-width:56ch;">
-          ClinicBook Pro is designed to complement — not replace — your existing hospital management system and reception staff.
-        </p>
-        <p style="font-size:1.05rem; color:var(--text-muted); max-width:56ch; margin-top:16px;">
-          It acts as a patient communication layer on WhatsApp, handling routine interactions such as appointment bookings, common questions, doctor availability, reminders and rescheduling requests.
-        </p>
-        <p style="font-size:1.05rem; color:var(--text-muted); max-width:56ch; margin-top:16px;">
-          The goal is to keep patient communication connected to the workflow your team already uses. That means less repetitive messaging and more time for reception staff to focus on patients and cases that actually need a human.
-        </p>
-        <p style="font-size:1.05rem; color:var(--text); font-weight:700; margin-top:24px;">
-          Faster patient response. Less repetitive communication. Your existing team stays in control.
-        </p>
+    <div class="fit">
+      <div class="text">
+        <p>ClinicBook Pro is designed to complement — not replace — your existing hospital management system and reception staff.</p>
+        <p>It acts as a patient communication layer on WhatsApp, handling routine interactions such as appointment bookings, common questions, doctor availability, reminders and rescheduling requests.</p>
+        <p>The goal is to keep patient communication connected to the workflow your team already uses. That means less repetitive messaging and more time for reception staff to focus on patients and cases that actually need a human.</p>
+        <p class="closer">Faster patient response. Less repetitive communication. Your existing team stays in control.</p>
       </div>
-
-      <div class="flow" style="grid-template-columns:1fr; gap:16px;">
-        <div class="flow-step">
-          <span class="n">YOUR SYSTEM</span>
-          <h4>Your existing systems</h4>
-          <p>Your current clinical and administrative workflows remain in place.</p>
-        </div>
-        <div class="flow-step">
-          <span class="n">SYNCS WITH</span>
-          <h4>ClinicBook Pro</h4>
-          <p>Adds WhatsApp-based patient communication, booking, FAQs, availability and reminders.</p>
-        </div>
-        <div class="flow-step escalate">
-          <span class="n">SEEN BY</span>
-          <h4>Your front desk staff</h4>
-          <p>Remains responsible for conversations and situations that need human attention.</p>
-        </div>
+      <div class="stack">
+        <div><small>Your system</small><h4>Your existing systems</h4><p>Your current clinical and administrative workflows remain in place.</p></div>
+        <div><small>Syncs with</small><h4>ClinicBook Pro</h4><p>Adds WhatsApp-based patient communication, booking, FAQs, availability and reminders.</p></div>
+        <div><small>Seen by</small><h4>Your front desk staff</h4><p>Remains responsible for conversations and situations that need human attention.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="final-cta" id="contact">
+<section class="final" id="contact">
   <div class="wrap">
-    <span class="eyebrow">See what it could look like for your facility</span>
-    <h2>Let's put ClinicBook Pro in the context of your patient workflow.</h2>
-    <p>In 15 minutes, we'll show you how it can handle a typical patient enquiry, appointment booking and staff handoff. No long presentation. No obligation.</p>
-    <p style="font-size:0.9rem; margin-top:8px; color:var(--text-light);">Use the buttons in the bottom-right corner to book a demo or message us on WhatsApp.</p>
+    <p class="label">See what it could look like for your facility</p>
+    <h2>Let’s put ClinicBook Pro in the context of your patient workflow.</h2>
+    <p>In 15 minutes, we’ll show you how it can handle a typical patient enquiry, appointment booking and staff handoff. No long presentation. No obligation.</p>
+    <div class="actions">
+      <a href="mailto:alfred@clinicbookpro.com?subject=Live%20demo%20request" class="btn btn-solid">Book a 15-minute demo</a>
+      <a href="https://wa.me/254708910797" class="btn btn-line">Message us on WhatsApp</a>
+    </div>
   </div>
 </section>
+</main>
 
 <footer>
-  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:16px;">
+  <div class="wrap">
     <span>ClinicBook Pro — WhatsApp patient communication for clinics and hospitals</span>
     <span>contact: alfred@clinicbookpro.com</span>
   </div>
 </footer>
 
-<script>
-  const chatLog = document.getElementById('chatLog');
-  const stamp = document.getElementById('stamp');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+<a href="https://wa.me/254708910797" class="wa-fab" aria-label="Message ClinicBook Pro on WhatsApp" title="Message us on WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M19.11 17.2c-.27-.14-1.58-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.15-1.34-.8-.71-1.34-1.58-1.5-1.85-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27s.98 2.64 1.11 2.82c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.26.18 1.74.11.53-.08 1.58-.65 1.8-1.27.23-.62.23-1.15.16-1.27-.07-.11-.25-.18-.52-.32z"/>
+    <path d="M16.01 3.2c-7.07 0-12.81 5.74-12.81 12.81 0 2.26.59 4.47 1.72 6.41L3.1 28.8l6.53-1.72a12.75 12.75 0 0 0 6.38 1.72h.01c7.06 0 12.8-5.74 12.8-12.81S23.08 3.2 16.01 3.2zm0 23.42h-.01a10.62 10.62 0 0 1-5.41-1.48l-.39-.23-3.88 1.02 1.04-3.78-.25-.39a10.6 10.6 0 1 1 8.9 4.86z"/>
+  </svg>
+</a>
 
+<script>
+  // Hero chat: replays the booking flow once when it scrolls into view.
+  const chatLog = document.getElementById('chatLog');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const script = [
-    { who: 'patient', text: 'Hi, I\'d like an appointment with a dentist' },
+    { who: 'patient', text: 'Hi, I’d like an appointment with a dentist' },
     { who: 'ai', text: 'Sure — what day works for you?' },
     { who: 'patient', text: 'Tomorrow morning if possible' },
-    { who: 'ai', text: 'There\'s a 9:30 slot open with Dr. Amrani. Shall I book it?' },
+    { who: 'ai', text: 'There’s a 9:30 slot open with Dr. Amrani. Shall I book it?' },
     { who: 'patient', text: 'Yes' },
     { who: 'ai', text: '✅ Appointment confirmed — 9:30, Dr. Amrani' }
   ];
-
-  function renderBubble(msg){
-    const div = document.createElement('div');
-    div.className = 'bubble ' + msg.who;
-    div.textContent = msg.text;
-    chatLog.appendChild(div);
+  function renderBubble(m){
+    const d = document.createElement('div');
+    d.className = 'bubble ' + m.who;
+    d.textContent = m.text;
+    chatLog.appendChild(d);
   }
-
   function playScript(){
     chatLog.innerHTML = '';
-    stamp.classList.remove('show');
-    if (reduceMotion){
-      script.forEach(renderBubble);
-      stamp.classList.add('show');
-      return;
-    }
-    script.forEach((msg, i) => {
-      setTimeout(() => {
-        renderBubble(msg);
-        if (i === script.length - 1){
-          setTimeout(() => stamp.classList.add('show'), 350);
-        }
-      }, i * 900);
-    });
+    if (reduceMotion){ script.forEach(renderBubble); return; }
+    script.forEach((m, i) => setTimeout(() => renderBubble(m), i * 900));
   }
+  new IntersectionObserver((entries, obs) => {
+    if (entries.some(e => e.isIntersecting)){ playScript(); obs.disconnect(); }
+  }, { threshold: 0.4 }).observe(document.getElementById('phone'));
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting){
-        playScript();
-        observer.disconnect();
-      }
-    });
-  }, { threshold: 0.4 });
-
-  observer.observe(document.getElementById('apptCard'));
-
+  // Full app tour videos. Add one by adding an object; omit "src" to show a play-button placeholder.
   const appTourVideos = [
-    {
-      tag: 'Doctor Dashboard',
-      title: 'A doctor\'s day at a glance',
-      desc: 'Today\'s schedule, upcoming patients, and availability — all in one screen.',
-      src: 'videos/doctor.mp4'
-    },
-    {
-      tag: 'Front Desk',
-      title: 'Handling an escalation',
-      desc: 'What your staff sees the moment the AI hands off a conversation.',
-      src: 'videos/receptionist.mp4'
-    },
-    {
-      tag: 'Admin',
-      title: 'Managing doctors and departments',
-      desc: 'Add a doctor, set their hours, and they\'re bookable the same day.',
-      src: 'videos/admin.mp4'
-    },
-    {
-      tag: 'Patient Booking Page',
-      title: 'Booking without WhatsApp',
-      desc: 'For patients who\'d rather book from a link than message the clinic.',
-      src: 'videos/patient.mp4'
-    }
+    { tag: 'Doctor Dashboard', title: 'A doctor’s day at a glance', desc: 'Today’s schedule, upcoming patients, and availability — all in one screen.', src: 'videos/doctor.mp4' },
+    { tag: 'Front Desk', title: 'Handling an escalation', desc: 'What your staff sees the moment the AI hands off a conversation.', src: 'videos/receptionist.mp4' },
+    { tag: 'Admin', title: 'Managing doctors and departments', desc: 'Add a doctor, set their hours, and they’re bookable the same day.', src: 'videos/admin.mp4' },
+    { tag: 'Patient Booking Page', title: 'Booking without WhatsApp', desc: 'For patients who’d rather book from a link than message the clinic.', src: 'videos/patient.mp4' }
   ];
-
-  function renderTourGrid(){
-    const grid = document.getElementById('appTourGrid');
-    grid.innerHTML = appTourVideos.map(v => `
-      <div class="video-card">
-        <div class="video-frame">
-          ${v.src
-            ? `<video controls preload="metadata" src="${v.src}"></video>`
-            : `<div class="play-btn"></div>`}
-        </div>
-        <div class="video-info">
-          <span class="tag">${v.tag}</span>
-          <h3>${v.title}</h3>
-          <p>${v.desc}</p>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  renderTourGrid();
-
-  (function(){
-    const wrap = document.getElementById('floatingMenuWrap');
-    const btn = document.getElementById('floatingMenuBtn');
-    const menu = document.getElementById('floatingMenu');
-    if(!wrap || !btn || !menu) return;
-
-    function closeMenu(){
-      wrap.classList.remove('open');
-      btn.setAttribute('aria-expanded','false');
-      menu.setAttribute('aria-hidden','true');
-    }
-
-    btn.addEventListener('click', function(){
-      const open = wrap.classList.toggle('open');
-      btn.setAttribute('aria-expanded', String(open));
-      menu.setAttribute('aria-hidden', String(!open));
-    });
-
-    menu.querySelectorAll('a[href^="#"]').forEach(function(link){
-      link.addEventListener('click', function(){ closeMenu(); });
-    });
-
-    document.addEventListener('click', function(e){
-      if(!wrap.contains(e.target)) closeMenu();
-    });
-
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape') closeMenu();
-    });
-  })();
+  document.getElementById('appTourGrid').innerHTML = appTourVideos.map(v => `
+    <div>
+      <div class="vid-frame">${v.src ? `<video controls preload="metadata" src="${v.src}"></video>` : `<div class="play"></div>`}</div>
+      <div class="vid-info"><span class="tag">${v.tag}</span><h3>${v.title}</h3><p>${v.desc}</p></div>
+    </div>`).join('');
 </script>
-
 </body>
 </html>
