@@ -7,25 +7,35 @@
 <meta name="description" content="ClinicBook Pro helps clinics and hospitals answer patient questions, book appointments, send reminders, and hand complex conversations to staff through WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F7F8F4;
-    --paper-raised:#FBFAF5;
-    --paper-2:#EEF3EE;
-    --ink:#10231D;
-    --ink-soft:#42544D;
-    --emerald:#087A5B;
-    --emerald-dark:#07543F;
-    --mint:#DDF4E9;
-    --clay:#E96D4B;
-    --clay-soft:#FFF0EA;
-    --mist:#DCE6E0;
-    --mist-dark:#C6D0C8;
-    --white:#FFFFFF;
-    --radius:2px;
-    --shadow:0 18px 50px rgba(16,35,29,.10);
-    --shadow-soft:0 10px 30px rgba(16,35,29,.07);
+    --bg:#FAFAFA;
+    --surface:#FFFFFF;
+    --surface-tint:#F4F6F4;
+    --surface-card:#FFFFFF;
+    --border:#E2E8E4;
+    --border-dark:#CBD5CD;
+    --text:#111814;
+    --text-muted:#4E5D55;
+    --text-light:#7A8C83;
+    
+    --primary:#065F46;
+    --primary-hover:#044E38;
+    --primary-light:#E6F4EA;
+    --accent:#E05638;
+    --accent-light:#FDF0EC;
+    
+    --wa-green:#25D366;
+    
+    --radius-sm:6px;
+    --radius-md:12px;
+    --radius-lg:20px;
+    --radius-full:9999px;
+    
+    --shadow-sm:0 1px 3px rgba(17,24,20,0.04), 0 1px 2px rgba(17,24,20,0.06);
+    --shadow-md:0 10px 25px -5px rgba(17,24,20,0.05), 0 8px 10px -6px rgba(17,24,20,0.04);
+    --shadow-lg:0 20px 40px -15px rgba(17,24,20,0.08);
   }
 
   *{box-sizing:border-box;}
@@ -37,136 +47,113 @@
 
   body{
     margin:0;
-    background:
-      radial-gradient(circle at 88% 8%, rgba(8,122,91,.09), transparent 28%),
-      radial-gradient(circle at 5% 36%, rgba(233,109,75,.06), transparent 24%),
-      var(--paper);
-    color:var(--ink);
-    font-family:'DM Sans', 'IBM Plex Sans', sans-serif;
+    background-color:var(--bg);
+    color:var(--text);
+    font-family:'Plus Jakarta Sans', sans-serif;
     font-size:16px;
-    line-height:1.55;
-    letter-spacing:-0.01em;
+    line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
 
-  a{color:inherit;}
-  :focus-visible{outline:2px solid var(--emerald); outline-offset:3px;}
+  a{color:inherit; text-decoration:none;}
+  :focus-visible{outline:2px solid var(--primary); outline-offset:2px;}
 
-  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 32px;}
 
   .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.76rem;
-    letter-spacing:0.12em;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.08em;
     text-transform:uppercase;
-    color:var(--emerald);
-    font-weight:800;
+    color:var(--primary);
+    font-weight:600;
   }
 
-  h1,h2,h3{
-    font-family:'Manrope', 'Fraunces', serif;
+  h1,h2,h3,h4{
+    font-family:'Instrument Serif', serif;
+    font-weight:400;
     margin:0;
-    color:var(--ink);
-    letter-spacing:-0.035em;
+    color:var(--text);
+    line-height:1.05;
   }
-  h1{font-weight:800;}
-  h2{font-weight:800;}
-  h3{font-weight:800;}
-  p{color:var(--ink-soft);}
+
+  p{color:var(--text-muted); margin:0;}
 
   /* ---------- NAV ---------- */
   header.site{
-    padding:18px 0;
-    border-bottom:1px solid rgba(16,35,29,.08);
-    background:rgba(247,248,244,.82);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
+    padding:20px 0;
+    background:rgba(250,250,250,0.85);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
     position:sticky;
     top:0;
     z-index:500;
+    border-bottom:1px solid var(--border);
   }
   .nav-inner{display:flex; align-items:center; justify-content:space-between;}
   .brand{
-    font-family:'Manrope', 'Fraunces', serif;
+    font-family:'Plus Jakarta Sans', sans-serif;
     font-weight:800;
-    font-size:19px;
-    letter-spacing:-0.02em;
+    font-size:1.15rem;
+    letter-spacing:-0.03em;
   }
-  .brand span{color:var(--emerald);}
-  nav.site-links{display:flex; gap:28px; font-size:14.5px;}
-  nav.site-links a{text-decoration:none; color:var(--ink-soft); font-weight:500;}
-  nav.site-links a:hover{color:var(--ink);}
+  .brand span{color:var(--primary);}
+  nav.site-links{display:flex; gap:32px; font-size:0.92rem; font-weight:500;}
+  nav.site-links a{color:var(--text-muted); transition:color 0.15s ease;}
+  nav.site-links a:hover{color:var(--text);}
 
   /* ---------- HERO ---------- */
   .hero{
-    padding:76px 0 88px;
+    padding:80px 0 100px;
     position:relative;
     overflow:hidden;
-    background:linear-gradient(135deg, rgba(221,244,233,.9), rgba(247,248,244,.78) 52%, rgba(255,240,234,.7));
   }
-  .hero::before{
-    content:"";
-    position:absolute;
-    width:420px; height:420px;
-    border-radius:50%;
-    background:rgba(8,122,91,.09);
-    right:-160px; top:-160px;
-  }
-  .hero::after{
-    content:"";
-    position:absolute;
-    width:260px; height:260px;
-    border-radius:50%;
-    background:rgba(233,109,75,.08);
-    left:-130px; bottom:-130px;
-  }
-  .hero > *{position:relative; z-index:1;}
   .hero-grid{
     display:grid;
-    grid-template-columns:1.05fr 0.95fr;
-    gap:56px;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:64px;
     align-items:center;
   }
   .hero h1{
-    font-size:clamp(2.1rem, 4.4vw, 3.4rem);
-    line-height:1.12;
+    font-size:clamp(3.2rem, 6vw, 4.8rem);
     margin-top:16px;
+    letter-spacing:-0.01em;
   }
   .hero h1 em{
     font-style:italic;
-    color:var(--emerald);
+    color:var(--primary);
   }
   .hero p.lede{
-    font-size:17.5px;
-    color:var(--ink-soft);
-    max-width:46ch;
-    margin-top:20px;
+    font-size:1.125rem;
+    color:var(--text-muted);
+    max-width:44ch;
+    margin-top:24px;
+    line-height:1.6;
   }
   .cta-row{
     display:flex;
-    gap:14px;
-    margin-top:32px;
+    gap:12px;
+    margin-top:36px;
     flex-wrap:wrap;
   }
   .btn{
-    font-family:'DM Sans', 'IBM Plex Sans', sans-serif;
-    font-size:14.5px;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-size:0.95rem;
     font-weight:600;
-    padding:14px 22px;
-    border-radius:8px;
-    text-decoration:none;
+    padding:14px 26px;
+    border-radius:var(--radius-full);
     display:inline-flex;
     align-items:center;
-    gap:8px;
+    gap:10px;
     border:1px solid transparent;
     cursor:pointer;
-    transition:transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    transition:all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .btn:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(16,35,29,.12);}
-  .btn-primary{background:var(--emerald); color:#fff;}
-  .btn-primary:hover{background:var(--emerald-dark);}
-  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--ink);}
-  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+  .btn:hover{transform:translateY(-1px); box-shadow:var(--shadow-md);}
+  .btn-primary{background:var(--primary); color:#fff;}
+  .btn-primary:hover{background:var(--primary-hover);}
+  .btn-ghost{background:transparent; color:var(--text); border-color:var(--border-dark);}
+  .btn-ghost:hover{background:var(--surface-tint); border-color:var(--text);}
 
   /* ---------- APPOINTMENT CARD (signature element) ---------- */
   .card-stage{
@@ -175,50 +162,40 @@
     justify-content:center;
   }
   .appt-card{
-    background:var(--paper-raised);
+    background:var(--surface);
     width:100%;
-    max-width:360px;
-    padding:22px 20px 26px;
-    border:1px solid var(--mist-dark);
-    border-radius:16px;
+    max-width:380px;
+    padding:24px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
     position:relative;
-    transform:rotate(-2deg);
-    box-shadow:0 22px 40px -18px rgba(28,43,39,0.28);
-  }
-  .appt-card::before{
-    content:"";
-    position:absolute;
-    top:0; left:0; right:0;
-    height:10px;
-    background-image:radial-gradient(circle, var(--paper) 3px, transparent 3.2px);
-    background-size:16px 10px;
-    background-position:2px 0;
-    background-repeat:repeat-x;
+    box-shadow:var(--shadow-lg);
   }
   .appt-head{
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    border-bottom:1px dashed var(--mist-dark);
-    padding-bottom:12px;
-    margin-bottom:14px;
-    margin-top:6px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:16px;
+    margin-bottom:18px;
   }
   .appt-head .label{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.1em;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.06em;
     text-transform:uppercase;
-    color:var(--ink-soft);
+    color:var(--text-light);
   }
   .appt-head .clinic-name{
-    font-family:'Fraunces', serif;
-    font-size:16px;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:700;
+    font-size:1rem;
     margin-top:2px;
+    color:var(--text);
   }
   .wa-dot{
-    width:8px; height:8px; border-radius:50%;
-    background:var(--emerald);
+    width:7px; height:7px; border-radius:50%;
+    background:var(--wa-green);
     display:inline-block;
     margin-right:6px;
   }
@@ -226,88 +203,84 @@
   .chat{
     display:flex;
     flex-direction:column;
-    gap:10px;
-    min-height:230px;
+    gap:12px;
+    min-height:260px;
   }
   .bubble{
-    max-width:82%;
-    padding:9px 13px;
-    border-radius:12px;
-    font-size:13.5px;
-    line-height:1.4;
+    max-width:85%;
+    padding:10px 14px;
+    border-radius:var(--radius-md);
+    font-size:0.9rem;
+    line-height:1.45;
     opacity:0;
-    transform:translateY(6px);
-    animation:rise 0.4s ease forwards;
+    transform:translateY(8px);
+    animation:rise 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   @keyframes rise{ to{opacity:1; transform:translateY(0);} }
   .bubble.patient{
     align-self:flex-end;
-    background:var(--mist);
-    color:var(--ink);
-    border-bottom-right-radius:3px;
+    background:var(--surface-tint);
+    color:var(--text);
+    border-bottom-right-radius:4px;
   }
   .bubble.ai{
     align-self:flex-start;
-    background:var(--emerald);
+    background:var(--primary);
     color:#fff;
-    border-bottom-left-radius:3px;
+    border-bottom-left-radius:4px;
   }
 
   .stamp{
     position:absolute;
-    bottom:18px;
-    right:18px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.08em;
-    color:var(--clay);
-    border:1.5px solid var(--clay);
-    padding:4px 9px;
-    border-radius:3px;
-    transform:rotate(-8deg) scale(0.85);
+    bottom:24px;
+    right:24px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.1em;
+    font-weight:700;
+    color:var(--accent);
+    border:2px solid var(--accent);
+    padding:6px 12px;
+    border-radius:var(--radius-sm);
+    transform:rotate(-6deg) scale(0.9);
     opacity:0;
-    transition:opacity 0.3s ease, transform 0.3s ease;
+    transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background:var(--accent-light);
   }
   .stamp.show{
     opacity:1;
-    transform:rotate(-8deg) scale(1);
+    transform:rotate(-6deg) scale(1);
   }
 
   /* ---------- SECTION SHARED ---------- */
-  section{padding:72px 0; scroll-margin-top:90px;}
-  section.alt{background:var(--paper-raised); border-top:1px solid var(--mist-dark); border-bottom:1px solid var(--mist-dark);}
-  .section-head{max-width:56ch; margin-bottom:40px;}
-  .section-head h2{font-size:clamp(1.6rem, 3.2vw, 2.4rem); margin-top:12px; line-height:1.2;}
-  .section-head p{color:var(--ink-soft); font-size:16px; margin-top:14px;}
-
-  #demo{
-    background:
-      radial-gradient(circle at 12% 20%, rgba(8,122,91,.08), transparent 25%),
-      radial-gradient(circle at 90% 80%, rgba(233,109,75,.07), transparent 24%);
-  }
+  section{padding:96px 0;}
+  section.alt{background:var(--surface-tint); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .section-head{max-width:60ch; margin-bottom:56px;}
+  .section-head h2{font-size:clamp(2.4rem, 4.5vw, 3.6rem); margin-top:8px;}
+  .section-head p{font-size:1.1rem; margin-top:16px;}
 
   /* ---------- VIDEOS ---------- */
   .video-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:28px;
+    grid-template-columns:repeat(2, 1fr);
+    gap:32px;
   }
   .video-card{
-    background:rgba(255,255,255,.82);
-    backdrop-filter:blur(8px);
-    border:1px solid rgba(16,35,29,.08);
-    border-radius:24px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
     overflow:hidden;
-    box-shadow:var(--shadow-soft);
-    transition:transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow:var(--shadow-sm);
+    transition:all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .video-card:hover{
-    transform:translateY(-5px);
-    box-shadow:var(--shadow);
+    transform:translateY(-4px);
+    box-shadow:var(--shadow-md);
+    border-color:var(--border-dark);
   }
   .video-frame{
     aspect-ratio:16/10;
-    background:var(--ink);
+    background:#000;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -319,123 +292,132 @@
   .play-btn{
     width:56px; height:56px;
     border-radius:50%;
-    background:rgba(245,243,236,0.92);
+    background:rgba(255,255,255,0.9);
     display:flex; align-items:center; justify-content:center;
     position:relative;
     z-index:2;
+    box-shadow:var(--shadow-md);
+    transition:transform 0.2s ease;
   }
+  .video-card:hover .play-btn {transform:scale(1.05);}
   .play-btn::after{
     content:"";
     border-style:solid;
-    border-width:9px 0 9px 15px;
-    border-color:transparent transparent transparent var(--ink);
+    border-width:8px 0 8px 14px;
+    border-color:transparent transparent transparent var(--text);
     margin-left:3px;
   }
-  .video-info{padding:18px 20px;}
+  .video-info{padding:24px;}
   .video-info .tag{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    color:var(--emerald-dark);
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    color:var(--primary);
     text-transform:uppercase;
-    letter-spacing:0.08em;
+    letter-spacing:0.06em;
+    font-weight:600;
   }
-  .video-info h3{font-size:19px; margin-top:6px;}
-  .video-info p{color:var(--ink-soft); font-size:14.5px; margin-top:6px;}
+  .video-info h3{font-family:'Plus Jakarta Sans', sans-serif; font-weight:700; font-size:1.15rem; margin-top:8px;}
+  .video-info p{font-size:0.95rem; margin-top:8px;}
 
   /* ---------- CHECKLIST ---------- */
   .intake{
-    background:var(--paper-raised);
-    border:1px solid var(--mist-dark);
-    border-radius:16px;
-    padding:8px 0;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    box-shadow:var(--shadow-sm);
   }
   .intake-row{
     display:flex;
     align-items:flex-start;
-    gap:16px;
-    padding:20px 28px;
-    border-bottom:1px solid var(--mist);
+    gap:20px;
+    padding:24px 32px;
+    border-bottom:1px solid var(--border);
+    transition:background 0.15s ease;
   }
+  .intake-row:hover{background:var(--surface-tint);}
   .intake-row:last-child{border-bottom:none;}
   .box{
-    width:18px; height:18px;
-    border:1.5px solid var(--emerald);
-    border-radius:3px;
+    width:20px; height:20px;
+    border:2px solid var(--primary);
+    border-radius:4px;
     flex-shrink:0;
-    margin-top:3px;
+    margin-top:2px;
     position:relative;
+    background:var(--primary-light);
   }
   .box::after{
     content:"";
     position:absolute;
-    left:3px; top:-1px;
-    width:5px; height:9px;
-    border-right:2px solid var(--emerald);
-    border-bottom:2px solid var(--emerald);
+    left:5px; top:1px;
+    width:6px; height:10px;
+    border-right:2px solid var(--primary);
+    border-bottom:2px solid var(--primary);
     transform:rotate(40deg);
   }
-  .intake-row .txt strong{display:block; font-size:15.5px; margin-bottom:3px; color:var(--ink);}
-  .intake-row .txt span{color:var(--ink-soft); font-size:14.5px;}
+  .intake-row .txt strong{display:block; font-size:1.02rem; margin-bottom:4px; color:var(--text); font-weight:700;}
+  .intake-row .txt span{color:var(--text-muted); font-size:0.95rem;}
 
   /* ---------- FLOW ---------- */
   .flow{
-    display:flex;
-    align-items:stretch;
-    gap:0;
-    flex-wrap:wrap;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:16px;
   }
   .flow-step{
-    flex:1 1 200px;
-    background:var(--paper);
-    border:1px solid var(--mist-dark);
-    padding:22px 20px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:28px 24px;
     position:relative;
+    box-shadow:var(--shadow-sm);
   }
-  .flow-step + .flow-step{border-left:none;}
   .flow-step .n{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    color:var(--emerald-dark);
-    letter-spacing:0.08em;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    color:var(--primary);
+    letter-spacing:0.06em;
+    font-weight:600;
   }
   .flow-step h4{
-    font-family:'Fraunces', serif;
-    font-size:16px;
-    font-weight:500;
-    margin:8px 0 6px;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-size:1.1rem;
+    font-weight:700;
+    margin:12px 0 8px;
+    color:var(--text);
   }
-  .flow-step p{font-size:13.5px; color:var(--ink-soft); margin:0;}
-  .flow-step.escalate{background:var(--ink); color:var(--paper);}
-  .flow-step.escalate .n{color:#8FBBA9;}
+  .flow-step p{font-size:0.9rem; color:var(--text-muted); margin:0;}
+  .flow-step.escalate{background:var(--text); color:#fff; border-color:var(--text);}
+  .flow-step.escalate .n{color:#86EFAC;}
   .flow-step.escalate h4{color:#fff;}
-  .flow-step.escalate p{color:#C9D6D0;}
+  .flow-step.escalate p{color:#D1D5DB;}
 
   /* ---------- FOOTER CTA ---------- */
   .final-cta{
     text-align:center;
-    padding:88px 0 96px;
+    padding:110px 0 120px;
   }
-  .final-cta h2{font-size:clamp(1.7rem, 3.4vw, 2.4rem); max-width:20ch; margin:14px auto 0;}
-  .final-cta p{color:var(--ink-soft); margin-top:16px; max-width:52ch; margin-left:auto; margin-right:auto;}
-  .final-cta .cta-row{justify-content:center;}
+  .final-cta h2{font-size:clamp(2.6rem, 5vw, 3.8rem); max-width:18ch; margin:16px auto 0;}
+  .final-cta p{color:var(--text-muted); margin-top:20px; max-width:48ch; margin-left:auto; margin-right:auto; font-size:1.1rem;}
+  .final-cta .cta-row{justify-content:center; margin-top:40px;}
 
   footer{
-    border-top:1px solid var(--mist-dark);
-    padding:28px 0;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px;
-    color:var(--ink-soft);
+    border-top:1px solid var(--border);
+    padding:32px 0;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.8rem;
+    color:var(--text-light);
     display:flex;
     justify-content:space-between;
     flex-wrap:wrap;
-    gap:10px;
+    gap:16px;
+    background:var(--surface);
   }
 
-  @media (max-width:860px){
-    .hero-grid{grid-template-columns:1fr; gap:44px;}
+  @media (max-width:960px){
+    .hero-grid{grid-template-columns:1fr; gap:48px;}
     .video-grid{grid-template-columns:1fr;}
-    .flow-step + .flow-step{border-left:1px solid var(--mist-dark); border-top:none;}
-    .flow{flex-direction:column;}
+    .flow{grid-template-columns:1fr;}
     .integration-grid{grid-template-columns:1fr !important;}
     nav.site-links{display:none;}
   }
@@ -443,90 +425,85 @@
   /* ---------- FLOATING ACTION BUTTONS ---------- */
   .floating-actions{
     position:fixed;
-    right:24px;
-    bottom:24px;
+    right:28px;
+    bottom:28px;
     z-index:9000;
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:12px;
   }
   .floating-btn{
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    gap:9px;
-    min-height:48px;
-    padding:0 17px;
-    border-radius:999px;
+    gap:10px;
+    height:52px;
+    padding:0 22px;
+    border-radius:var(--radius-full);
     text-decoration:none;
-    font-family:'DM Sans', sans-serif;
-    font-size:14px;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-size:0.92rem;
     font-weight:700;
-    box-shadow:0 14px 35px rgba(16,35,29,.18);
-    transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    box-shadow:var(--shadow-md);
+    transition:all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .floating-btn:hover{
     transform:translateY(-2px);
-    box-shadow:0 16px 38px rgba(16,35,29,.24);
+    box-shadow:var(--shadow-lg);
   }
   .floating-book{
-    background:var(--ink);
+    background:var(--text);
     color:#fff;
   }
-  .floating-book:hover{background:var(--emerald-dark);}
+  .floating-book:hover{background:var(--primary);}
   .floating-whatsapp{
     width:52px;
     height:52px;
-    min-height:52px;
     padding:0;
     border-radius:50%;
-    background:#25D366;
+    background:var(--wa-green);
     color:#fff;
   }
-  .floating-whatsapp:hover{background:#1ebe5d;}
+  .floating-whatsapp:hover{background:#1da851;}
   .whatsapp-icon{
-    width:27px;
-    height:27px;
+    width:26px;
+    height:26px;
     display:block;
     fill:currentColor;
   }
 
   @media (max-width:600px){
     .floating-actions{
-      right:14px;
-      bottom:14px;
-      left:14px;
+      right:16px;
+      bottom:16px;
+      left:16px;
       justify-content:flex-end;
     }
     .floating-book{
       flex:1;
-      max-width:230px;
+      max-width:220px;
     }
-    .floating-btn{min-height:46px;}
     .floating-whatsapp{
-      width:50px;
-      height:50px;
-      min-height:50px;
-      flex:0 0 50px;
+      flex:0 0 52px;
     }
   }
 
   /* ---------- FLOATING NAV MENU ---------- */
   .floating-menu-wrap{
     position:fixed;
-    top:18px;
-    right:22px;
+    top:20px;
+    right:32px;
     z-index:9500;
   }
   .floating-menu-btn{
     width:52px;
     height:52px;
-    border:1px solid rgba(16,35,29,.10);
-    border-radius:16px;
-    background:rgba(255,255,255,.94);
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
-    box-shadow:0 12px 32px rgba(16,35,29,.14);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    background:rgba(255,255,255,0.9);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    box-shadow:var(--shadow-sm);
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -534,35 +511,35 @@
     gap:5px;
     cursor:pointer;
     padding:0;
+    transition:all 0.2s ease;
   }
+  .floating-menu-btn:hover{border-color:var(--border-dark); background:#fff;}
   .floating-menu-btn span{
     display:block;
-    width:21px;
+    width:20px;
     height:2px;
-    border-radius:999px;
-    background:var(--ink);
-    transition:transform .22s ease, opacity .22s ease;
+    border-radius:var(--radius-full);
+    background:var(--text);
+    transition:transform .2s ease, opacity .2s ease;
   }
   .floating-menu-wrap.open .floating-menu-btn span:nth-child(1){transform:translateY(7px) rotate(45deg);}
   .floating-menu-wrap.open .floating-menu-btn span:nth-child(2){opacity:0;}
   .floating-menu-wrap.open .floating-menu-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
   .floating-menu-dropdown{
     position:absolute;
-    top:62px;
+    top:64px;
     right:0;
     width:220px;
     padding:8px;
-    border:1px solid rgba(16,35,29,.09);
-    border-radius:18px;
-    background:rgba(255,255,255,.97);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    box-shadow:0 18px 45px rgba(16,35,29,.16);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    background:var(--surface);
+    box-shadow:var(--shadow-lg);
     opacity:0;
     visibility:hidden;
-    transform:translateY(-7px) scale(.98);
+    transform:translateY(-6px) scale(.98);
     transform-origin:top right;
-    transition:opacity .18s ease, transform .18s ease, visibility .18s ease;
+    transition:opacity .15s ease, transform .15s ease, visibility .15s ease;
   }
   .floating-menu-wrap.open .floating-menu-dropdown{
     opacity:1;
@@ -571,22 +548,17 @@
   }
   .floating-menu-dropdown a{
     display:block;
-    padding:12px 13px;
-    border-radius:12px;
-    color:var(--ink);
+    padding:10px 14px;
+    border-radius:var(--radius-sm);
+    color:var(--text);
     text-decoration:none;
-    font-weight:700;
-    font-size:.92rem;
-    transition:background .18s ease, color .18s ease;
+    font-weight:600;
+    font-size:0.9rem;
+    transition:background .15s ease, color .15s ease;
   }
   .floating-menu-dropdown a:hover{
-    background:var(--mint);
-    color:var(--emerald-dark);
-  }
-  @media (max-width:700px){
-    .floating-menu-wrap{top:12px; right:14px;}
-    .floating-menu-btn{width:48px; height:48px;}
-    .floating-menu-dropdown{top:58px; width:205px;}
+    background:var(--surface-tint);
+    color:var(--primary);
   }
 </style>
 </head>
@@ -632,10 +604,10 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">WhatsApp Patient Communication for Clinics & Hospitals</p>
+      <span class="eyebrow">WhatsApp Patient Communication for Clinics & Hospitals</span>
       <h1>Turn patient WhatsApp enquiries into <em>booked appointments.</em></h1>
       <p class="lede">ClinicBook Pro gives your facility a WhatsApp AI receptionist that answers routine questions, checks availability, books and reschedules appointments, sends reminders, and hands complex conversations to your staff.</p>
-      <p class="lede" style="font-size:14.5px; margin-top:14px;"><strong>Works alongside your front desk — not instead of it.</strong></p>
+      <p class="lede" style="font-size:0.95rem; margin-top:12px; color:var(--text);"><strong>Works alongside your front desk — not instead of it.</strong></p>
       <div class="cta-row">
         <a href="#demo" class="btn btn-primary">▶ See it in action</a>
       </div>
@@ -657,17 +629,17 @@
   </div>
 </section>
 
-<section style="padding:28px 0; border-top:1px solid var(--mist-dark); border-bottom:1px solid var(--mist-dark); background:var(--paper-raised);">
+<section style="padding:28px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--surface);">
   <div class="wrap" style="text-align:center;">
-    <p class="eyebrow" style="margin:0;">For hospital owners · administrators · clinic managers · medical directors</p>
-    <p style="margin:8px auto 0; font-size:17px; color:var(--ink); max-width:70ch;">Improve patient response without adding another person to the front desk.</p>
+    <span class="eyebrow" style="margin:0;">For hospital owners · administrators · clinic managers · medical directors</span>
+    <p style="margin:6px auto 0; font-size:1.05rem; color:var(--text); max-width:70ch; font-weight:500;">Improve patient response without adding another person to the front desk.</p>
   </div>
 </section>
 
 <section id="problem">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">The patient communication problem</p>
+      <span class="eyebrow">The patient communication problem</span>
       <h2>Your front desk shouldn't have to answer the same question all day.</h2>
       <p>Patients want quick answers. Your staff may already be answering calls, serving patients, checking schedules and handling administrative work.</p>
     </div>
@@ -692,10 +664,10 @@
   </div>
 </section>
 
-<section id="demo">
+<section id="demo" class="alt">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">See it in action</p>
+      <span class="eyebrow">See it in action</span>
       <h2>Don't just read about it. Watch the patient journey.</h2>
       <p>These videos show ClinicBook Pro handling real patient-service workflows on WhatsApp — from questions and booking to reminders and waitlist management.</p>
     </div>
@@ -744,10 +716,10 @@
   </div>
 </section>
 
-<section class="alt">
+<section>
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">Built for the whole facility</p>
+      <span class="eyebrow">Built for the whole facility</span>
       <h2>What changes for your patients, staff and management</h2>
       <p>ClinicBook Pro is not just a chatbot. It is a patient communication workflow designed to take routine work off the front desk while keeping your staff in control.</p>
     </div>
@@ -776,10 +748,10 @@
   </div>
 </section>
 
-<section id="tour">
+<section id="tour" class="alt">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">More than WhatsApp</p>
+      <span class="eyebrow">More than WhatsApp</span>
       <h2>The tools behind the patient conversation</h2>
       <p>ClinicBook Pro also gives doctors, reception staff and administrators the tools they need to manage the appointments and workflows behind the conversations.</p>
     </div>
@@ -790,7 +762,7 @@
 <section id="how">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">AI + your front desk</p>
+      <span class="eyebrow">AI + your front desk</span>
       <h2>Your receptionist stays in control.</h2>
       <p>ClinicBook Pro handles the repetitive conversations. Your staff handles the conversations that need human judgment.</p>
     </div>
@@ -822,28 +794,28 @@
 <section class="alt">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">Designed to fit your workflow</p>
+      <span class="eyebrow">Designed to fit your workflow</span>
       <h2>Add a WhatsApp communication layer without replacing your existing systems.</h2>
       <p>ClinicBook Pro is designed to work alongside your existing hospital or clinic operations and front desk.</p>
     </div>
 
     <div style="display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:start;" class="integration-grid">
       <div>
-        <p style="font-size:16px; color:var(--ink-soft); max-width:56ch;">
+        <p style="font-size:1.05rem; color:var(--text-muted); max-width:56ch;">
           ClinicBook Pro is designed to complement — not replace — your existing hospital management system and reception staff.
         </p>
-        <p style="font-size:16px; color:var(--ink-soft); max-width:56ch; margin-top:16px;">
+        <p style="font-size:1.05rem; color:var(--text-muted); max-width:56ch; margin-top:16px;">
           It acts as a patient communication layer on WhatsApp, handling routine interactions such as appointment bookings, common questions, doctor availability, reminders and rescheduling requests.
         </p>
-        <p style="font-size:16px; color:var(--ink-soft); max-width:56ch; margin-top:16px;">
+        <p style="font-size:1.05rem; color:var(--text-muted); max-width:56ch; margin-top:16px;">
           The goal is to keep patient communication connected to the workflow your team already uses. That means less repetitive messaging and more time for reception staff to focus on patients and cases that actually need a human.
         </p>
-        <p style="font-size:16.5px; color:var(--ink); font-weight:600; margin-top:20px;">
+        <p style="font-size:1.05rem; color:var(--text); font-weight:700; margin-top:24px;">
           Faster patient response. Less repetitive communication. Your existing team stays in control.
         </p>
       </div>
 
-      <div class="flow" style="flex-direction:column;">
+      <div class="flow" style="grid-template-columns:1fr; gap:16px;">
         <div class="flow-step">
           <span class="n">YOUR SYSTEM</span>
           <h4>Your existing systems</h4>
@@ -866,23 +838,21 @@
 
 <section class="final-cta" id="contact">
   <div class="wrap">
-    <p class="eyebrow">See what it could look like for your facility</p>
+    <span class="eyebrow">See what it could look like for your facility</span>
     <h2>Let's put ClinicBook Pro in the context of your patient workflow.</h2>
     <p>In 15 minutes, we'll show you how it can handle a typical patient enquiry, appointment booking and staff handoff. No long presentation. No obligation.</p>
-    <p style="font-size:14.5px; margin-top:6px;">Use the buttons in the bottom-right corner to book a demo or message us on WhatsApp.</p>
+    <p style="font-size:0.9rem; margin-top:8px; color:var(--text-light);">Use the buttons in the bottom-right corner to book a demo or message us on WhatsApp.</p>
   </div>
 </section>
 
 <footer>
-  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:16px;">
     <span>ClinicBook Pro — WhatsApp patient communication for clinics and hospitals</span>
     <span>contact: alfred@clinicbookpro.com</span>
   </div>
 </footer>
 
 <script>
-  // Hero chat animation — replays the booking flow with a small typing delay.
-  // Respects prefers-reduced-motion by rendering instantly instead of animating.
   const chatLog = document.getElementById('chatLog');
   const stamp = document.getElementById('stamp');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -932,18 +902,6 @@
 
   observer.observe(document.getElementById('apptCard'));
 
-  // ---------------------------------------------------------------
-  // Full app tour videos — the rest of ClinicBook Pro, not just the
-  // AI receptionist. Add a new video by adding one object below.
-  // "src" is optional — leave it out and the card shows a play
-  // button placeholder until you have a recording ready.
-  //   {
-  //     tag:  'Front Desk',                 // short category label
-  //     title: 'Handling an escalation',     // card headline
-  //     desc: 'What your receptionist sees when the AI hands off a conversation.',
-  //     src:  'videos/front-desk-handoff.mp4' // optional, omit if not recorded yet
-  //   }
-  // ---------------------------------------------------------------
   const appTourVideos = [
     {
       tag: 'Doctor Dashboard',
@@ -991,7 +949,6 @@
 
   renderTourGrid();
 
-  // Floating nav menu (hamburger)
   (function(){
     const wrap = document.getElementById('floatingMenuWrap');
     const btn = document.getElementById('floatingMenuBtn');
